@@ -12,10 +12,13 @@
 	
 	# Define the class
 	$Montr = new Montr();
+
+	# Install montr if it has not been
+	$Montr->InstallMontr();
 	
 	# General configuration
 	$Cfg_general = array(
-		'site_name' => 'Website Title',
+		'site_name' => 'Home NAS',
 		'nexmo_key' => '885db2be',
 		'nexmo_secret' => '773f91d9',
 		'alert_on_clear' => 0,
@@ -24,7 +27,7 @@
 	
 	# Who to contact when an alert is triggered
 	$Cfg_contacts = array(
-		//'mobile_personal' => '447711868356',
+		'mobile_personal' => '447711868356',
 		'mobile_work' => '447867396980',
 		'email_alerts' => 'alerts@paq.nz',
 		'email_personal' => 'alex@paq.nz'
@@ -33,7 +36,7 @@
 	# Disk configuration
 	$Cfg_disks = array(
 		0 => array(
-			'name' => 'SSD Disk',
+			'name' => 'OS SSD',
 			'location' => '/',
 			'limit' => '80' # (%)
 		),
@@ -74,11 +77,18 @@
 			# Get the day
 			$cTime = time();
 			
-			# Check if we have a log
-			if(file_exists(__DIR__ . '/../data/' . date('m-d-y', $cTime) . '.json')) {
+			# Check if we have an alert log
+			if(file_exists(__DIR__ . '/../data/alerts_' . date('m-d-y', $cTime) . '.json')) {
 				return;
 			}else{
-				$mkLog = fopen(__DIR__ . '/../data/' . date('m-d-y', $cTime) . '.json', 'w') or die('Please ensure the data folder is writable');
+				$mkAlertLog = fopen(__DIR__ . '/../data/alerts_' . date('m-d-y', $cTime) . '.json', 'w') or die('Please ensure the data folder is writable');
+			}
+			
+			# Check if we have a data log
+			if(file_exists(__DIR__ . '/../data/data_' . date('m-d-y', $cTime) . '.json')) {
+				return;
+			}else{
+				$mkDataLog = fopen(__DIR__ . '/../data/data_' . date('m-d-y', $cTime) . '.json', 'w') or die('Please ensure the data folder is writable');
 			}
 		}
 		
@@ -110,7 +120,7 @@
 			}
 			
 			# Open our log file and decode the JSON
-			$LogContents = file_get_contents(__DIR__ . '/../data/' . date('m-d-y', $cTime) . '.json');
+			$LogContents = file_get_contents(__DIR__ . '/../data/alerts_' . date('m-d-y', $cTime) . '.json');
 			$tmpContents = json_decode($LogContents);
 			
 			# Is the file empty?
@@ -125,7 +135,7 @@
 			$jsonData = json_encode($tmpContents);
 			
 			# ...and then put it back
-			file_put_contents(__DIR__ . '/../data/' . date('m-d-y', $cTime) . '.json', $jsonData);
+			file_put_contents(__DIR__ . '/../data/alerts_' . date('m-d-y', $cTime) . '.json', $jsonData);
 		}
 		
 		function getProcessorInfo() {

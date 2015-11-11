@@ -12,10 +12,14 @@
 
 	$Processor = $Montr->getProcessorInfo();
 
-	# Get the latest log
+	# Get the latest alerts log if available
 	$cTime = time();
-	$GetLog = file_get_contents(__DIR__ . '/data/' . date('m-d-y', $cTime) . '.json');
-
+	if(file_exists(__DIR__ . '/data/alerts_' . date('m-d-y', $cTime) . '.json')) {
+		$GetLog = file_get_contents(__DIR__ . '/data/alerts_' . date('m-d-y', $cTime) . '.json');
+	}else{
+		$GetLog = '';
+	}
+	
 	# Check that it is not empty
 	if(!empty($GetLog)) {
 		$EmptyLog = 0;
