@@ -21,8 +21,7 @@
 		'site_name' => 'Home NAS',
 		'nexmo_key' => '885db2be',
 		'nexmo_secret' => '773f91d9',
-		'alert_on_clear' => 0,
-		'show_logs' => 1
+		'alert_on_clear' => 0
 	);
 	
 	# Who to contact when an alert is triggered
@@ -41,30 +40,36 @@
 			'limit' => '80' # (%)
 		),
 		1 => array(
-			'name' => 'Storage One',
-			'location' => '/mnt/store1',
+			'name' => 'External USB Storage',
+			'location' => '/media/alex/Storage',
 			'limit' => '80' # (%)
 		),
 		2 => array(
-			'name' => 'Media Store',
-			'location' => '/mnt/store2',
+			'name' => 'Storage One',
+			'location' => '/media/alex/store1',
 			'limit' => '95' # (%)
 		),
 		3 => array(
-			'name' => 'Storage Three',
-			'location' => '/mnt/store3',
-			'limit' => '80' # (%)
+			'name' => 'Media Store',
+			'location' => '/media/alex/store2',
+			'limit' => '95' # (%)
 		),
 		4 => array(
+			'name' => 'Storage Three',
+			'location' => '/media/alex/store3',
+			'limit' => '95' # (%)
+		),
+		5 => array(
 			'name' => 'Storage Four',
-			'location' => '/mnt/store4',
-			'limit' => '80' # (%)
+			'location' => '/media/alex/store4',
+			'limit' => '95' # (%)
 		),
 	);
 	
 	# The limits that must be reached to send out alerts
 	$Cfg_limits = array(
 		'memory_usage' => '75', # (%)
+		'memory_units' => 'mb',
 		'load_alert' => '6'
 	);
 	
@@ -78,17 +83,10 @@
 			$cTime = time();
 			
 			# Check if we have an alert log
-			if(file_exists(__DIR__ . '/../data/alerts_' . date('m-d-y', $cTime) . '.json')) {
+			if(file_exists(__DIR__ . '/../data/alerts_' . date('d-m-y', $cTime) . '.json')) {
 				return;
 			}else{
-				$mkAlertLog = fopen(__DIR__ . '/../data/alerts_' . date('m-d-y', $cTime) . '.json', 'w') or die('Please ensure the data folder is writable');
-			}
-			
-			# Check if we have a data log
-			if(file_exists(__DIR__ . '/../data/data_' . date('m-d-y', $cTime) . '.json')) {
-				return;
-			}else{
-				$mkDataLog = fopen(__DIR__ . '/../data/data_' . date('m-d-y', $cTime) . '.json', 'w') or die('Please ensure the data folder is writable');
+				$mkAlertLog = fopen(__DIR__ . '/../data/alerts_' . date('d-m-y', $cTime) . '.json', 'w') or die('Please ensure the data folder is writable');
 			}
 		}
 		
@@ -120,7 +118,7 @@
 			}
 			
 			# Open our log file and decode the JSON
-			$LogContents = file_get_contents(__DIR__ . '/../data/alerts_' . date('m-d-y', $cTime) . '.json');
+			$LogContents = file_get_contents(__DIR__ . '/../data/alerts_' . date('d-m-y', $cTime) . '.json');
 			$tmpContents = json_decode($LogContents);
 			
 			# Is the file empty?
@@ -135,7 +133,7 @@
 			$jsonData = json_encode($tmpContents);
 			
 			# ...and then put it back
-			file_put_contents(__DIR__ . '/../data/alerts_' . date('m-d-y', $cTime) . '.json', $jsonData);
+			file_put_contents(__DIR__ . '/../data/alerts_' . date('d-m-y', $cTime) . '.json', $jsonData);
 		}
 		
 		function getProcessorInfo() {
@@ -159,7 +157,7 @@
 			);
 		}
 		
-		function getMemory() {
+		function getMemory($units = '') {
 			$memData = explode("\n", file_get_contents("/proc/meminfo"));
 			$memInfo = array();
 			foreach ($memData as $line) {
@@ -184,9 +182,22 @@
 			# Work out the memory used
 			$Memory_used = $Memory_total - $Memory_used_free - $Memory_used_buffers - $Memory_used_cached;
 			
-			# Round the values to the nearest MB
-			$Memory_total = round($Memory_total/1024);
-			$Memory_used = round($Memory_used/1024);
+			# Work out units
+			if((empty($units)) || strtolower($units) != 'kb' && strtolower($units) != 'mb' && strtolower($units) != 'gb'){
+				$units = 'mb';
+			}
+			
+			# Work out units
+			if(strtolower($units) == 'kb'){
+				$Memory_total = round($Memory_total);
+				$Memory_used = round($Memory_used);
+			}else if(strtolower($units) == 'mb') {
+				$Memory_total = round($Memory_total/1024);
+				$Memory_used = round($Memory_used/1024);
+			}else if(strtolower($units) == 'gb'){
+				$Memory_total = round($Memory_total/1048576, 2);
+				$Memory_used = round($Memory_used/1048576, 2);
+			}
 			
 			# Free Memory
 			$Memory_free = round($Memory_total-$Memory_used, 2);
@@ -258,10 +269,12 @@
 			foreach($Contacts as $Contact_type => $Contact) {
 				# Send mobile alerts via Nexmo / SMS
 				if(strpos($Contact_type, 'mobile') !== false) {
-					$NexmoSMS = new NexmoMessage($General['nexmo_key'], $General['nexmo_secret']);
+					if(!empty($General['nexmo_key']) && !empty($General['nexmo_secret'])) {
+						$NexmoSMS = new NexmoMessage($General['nexmo_key'], $General['nexmo_secret']);
 					
-					# Send the SMS message
-					$info = $NexmoSMS->sendText($Contact, 'Montr Alert', 'A ' . $Type . ' alert has been generated for ' . $General['site_name'] . '!');
+						# Send the SMS message
+						$info = $NexmoSMS->sendText($Contact, 'Montr Alert', 'A ' . $Type . ' alert has been generated for ' . $General['site_name'] . '!');
+					}
 				}
 				
 				# Send an email alert
