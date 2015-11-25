@@ -1,60 +1,55 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Montr - Resource Monitoring</title>
-		<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' rel='stylesheet'>
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+		<title>Montr - Resource Monitoring</title>		
+		<link type="text/css" rel="stylesheet" href="resources/style/css/bootstrap.min.css" media="screen,projection"/>
+		<link type="text/css" rel="stylesheet" href="resources/style/css/font-awesome.min.css" media="screen"/>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+		<link type="text/css" rel="stylesheet" href="resources/style/css/montr.css" media="screen"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<style>
-			body {
-				font-family: 'Open Sans', sans-serif;
-			}
-			
-			.progress-bar {
-				background: rgba(130, 170, 204, 1);
-			}
-			
-			.label-success {
-			  background-color: #77DD77;
-			}
-			
-			.label-info {
-			  background-color: #779ECB;
-			}
-			
-			.label-warning {
-			  background-color: #CFCFC4;
-			}
-			.progress {
-			  width: 100%;
-			}
-			.barwrapp {
-			  position: relative;
-			  max-width: 600px;
-			}
-		</style>
 	</head>
 	
 	<body>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-3"></div>
-				<div class="col-md-6">
-					<h3 style="margin-top:65px;"> m<span style="color:#779ECB;">on</span>tr</h3>
-					<div class="panel panel-default">
-						<div class="panel-body fill-in">
-							
-						</div>
-					</div>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcollapse" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">
+						<img alt="" class="menuimg" />
+						<p class="logo_letter">m</p>
+					</a>
 				</div>
 				
-				<div class="col-md-3"></div>
+				<div class="collapse navbar-collapse" id="navcollapse">
+					<ul class="nav navbar-nav" style="margin-left:22px;">
+						<li class="active"><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
+						<li><a href="logfiles.php">Logs</a></li>
+					</ul>
+				</div>
 			</div>
-			<p align="center">powered by m<span style="color:#779ECB;">on</span>tr</p>
+		</nav>
+		
+        <div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<p align="center" class="title">montr</p>
+					<div class="fill-in">
+
+					</div>
+				</div>
+			</div>
 		</div>
 		
-		<script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
-		<script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+		<br />
+		
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="resources/style/js/bootstrap.min.js"></script>
 		
 		<script>
 			// Initially load the table
