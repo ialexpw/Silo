@@ -1,0 +1,50 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	padding-top: 70px;
+}
+
+.menuimg {
+	height:22px;
+	width:22px;
+	border: solid 1px #AEC6CF;
+	border-radius: 2px;
+	background: #AEC6CF;
+	position: absolute;
+}
+
+.logo_letter {
+	font-family: 'Gloria Hallelujah', cursive;
+	font-size: 20px;
+	z-index: 100;
+	color: #fff;
+	position: absolute;
+	margin-left:3px;
+}
+
+.title {
+	font-family: 'Gloria Hallelujah', cursive;
+	font-size:50px;
+}
+
+.progress-bar, .determinate {
+	background: rgba(130, 170, 204, 1);
+}
+
+.label-success {
+  background-color: #77DD77;
+}
+
+.label-info {
+  background-color: #779ECB;
+}
+
+.label-warning {
+  background-color: #CFCFC4;
+}
+.progress {
+  width: 100%;
+}
+.barwrapp {
+  position: relative;
+  max-width: 600px;
+}
