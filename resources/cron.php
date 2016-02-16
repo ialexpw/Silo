@@ -35,6 +35,7 @@
 					$Montr->WriteLog($type . ' - ' . $Montr->makeSlug($Disk['name']), $Cfg_limits);
 				}
 			}else{
+				# Coming out of an alarm? Remove the alarm file
 				if(file_exists(__DIR__ . '/data/disk_usage_' . $Montr->makeSlug($Disk['name']))) {
 					unlink(__DIR__ . '/data/disk_usage_' . $Montr->makeSlug($Disk['name']));
 					
@@ -71,6 +72,7 @@
 						$Montr->WriteLog($type, $Cfg_limits);
 					}
 				}else{
+					# Coming out of alarm? Remove the alarm file
 					if(file_exists(__DIR__ . '/data/disk_usage_' . $Montr->makeSlug($Disk))) {
 						unlink(__DIR__ . '/data/disk_usage_' . $Montr->makeSlug($Disk));
 						
@@ -101,6 +103,7 @@
 					$Montr->WriteLog($type, $Cfg_limits);
 				}
 			}else{
+				# Coming out of alarm? Remove the alarm file 
 				if(file_exists(__DIR__ . '/data/memory_usage')) {
 					unlink(__DIR__ . '/data/memory_usage');
 					
@@ -130,6 +133,7 @@
 					$Montr->WriteLog($type, $Cfg_limits);
 				}
 			}else{
+				# Coming out of alarm? Remove the alarm file
 				if(file_exists(__DIR__ . '/data/load_alert')) {
 					unlink(__DIR__ . '/data/load_alert');
 					
