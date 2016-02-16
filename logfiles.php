@@ -1,4 +1,7 @@
 <?php
+	# Start the session
+	InitSession();
+
 	# Simple API
 	if(!empty($_GET['alerts'])) {
 		# Save the date into a variable
@@ -79,3 +82,29 @@
 		</script>
 	</body>
 </html>
+<?php
+	function LoadConfig() {
+		if(file_exists(__DIR__ . '/resources/data/config.json')) {
+			$cfgCont = file_get_contents(__DIR__ . '/resources/data/config.json');
+
+			$cfgCont = json_decode($cfgCont, true);
+
+			return $cfgCont;
+		}
+	}
+
+	# Custom session function
+	function InitSession($timeout = 3600) {
+		ini_set('session.gc_maxlifetime', $timeout);
+		session_start();
+
+		if(isset($_SESSION['timeout_idle']) && $_SESSION['timeout_idle'] < time()) {
+			session_destroy();
+			session_start();
+			session_regenerate_id();
+			$_SESSION = array();
+		}
+
+		$_SESSION['timeout_idle'] = time() + $timeout;
+	}
+?>
