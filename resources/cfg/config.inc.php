@@ -39,31 +39,6 @@
 			'location' => '/',
 			'limit' => '80' # (%)
 		),
-		1 => array(
-			'name' => 'External USB Storage',
-			'location' => '/media/alex/Storage',
-			'limit' => '80' # (%)
-		),
-		2 => array(
-			'name' => 'Storage One',
-			'location' => '/media/alex/store1',
-			'limit' => '95' # (%)
-		),
-		3 => array(
-			'name' => 'Media Store',
-			'location' => '/media/alex/store2',
-			'limit' => '95' # (%)
-		),
-		4 => array(
-			'name' => 'Storage Three',
-			'location' => '/media/alex/store3',
-			'limit' => '95' # (%)
-		),
-		5 => array(
-			'name' => 'Storage Four',
-			'location' => '/media/alex/store4',
-			'limit' => '95' # (%)
-		),
 	);
 	
 	# The limits that must be reached to send out alerts
@@ -305,8 +280,32 @@
 			
 			# Default configuration
 			$defCfg = array(
-				'username' => 'admin',
-				'password' => 'password'
+				
+			);
+			
+			# Hash the password
+			$stPass = password_hash('password', PASSWORD_BCRYPT);
+			
+			$defCfg = array(
+				'auth' => array(
+					'password' => $stPass
+				),
+				'disks' => array(
+					0 => array(
+						'name' => 'Main Drive',
+						'location' => '/',
+						'limit' => '80' # (%)
+					),
+				),
+				'contacts' => array(
+					'mobile_personal' => '447711868356',
+					'email_alerts' => 'alerts@paq.nz'
+				),
+				'limits' => array(
+					'memory_usage' => '75', # (%)
+					'memory_units' => 'mb',
+					'load_alert' => '6'
+				)
 			);
 			
 			# JSON encode it
