@@ -11,6 +11,69 @@
 			$_SESSION['Authenticated'] = 1;
 		}
 	}
+
+	# Updating the configuration
+	if(isset($_GET['udc']) && !empty($_POST)) {
+		echo 'update??';
+		
+		$defCfg = array();
+		
+		$defCfg['auth']['password'] = 'test';
+		
+		$defCfg['disks'][0]['name'] = 'Name';
+		
+		print_r($defCfg);
+		
+		/*$defCfg = array(
+			'auth' => array(
+				'password' => ''
+			),
+			'disks' => array(
+				0 => array(
+					'name' => '',
+					'location' => '',
+					'limit' => ''
+				),
+				1 => array(
+					'name' => '',
+					'location' => '',
+					'limit' => ''
+				),
+				2 => array(
+					'name' => '',
+					'location' => '',
+					'limit' => ''
+				),
+				3 => array(
+					'name' => '',
+					'location' => '',
+					'limit' => ''
+				),
+				4 => array(
+					'name' => '',
+					'location' => '',
+					'limit' => ''
+				),
+			),
+			'contacts' => array(
+				'mobile_1' => '',
+				'email_1' => '',
+				'mobile_2' => '',
+				'email_2' => '',
+				'mobile_3' => '',
+				'email_3' => ''
+			),
+			'limits' => array(
+				'memory_usage' => '75', # (%)
+				'memory_units' => 'mb',
+				'load_alert' => '6'
+			)
+		);*/
+	}
+
+	echo '<pre>';
+	print_r($_POST);
+	echo '</pre>';
 ?>
 <!DOCTYPE html>
 <html>
@@ -100,7 +163,7 @@
 			<div class="modal-body">
 				<h4>Drive Information</h4>
 				
-				<form class="form-inline">
+				<form class="form-inline" action="?udc" id="cfgUp" name="cfgUp" method="post">
 				<?php
 					############# DRIVE ONE
 					echo '<br /><h5>Drive 1</h5>';
@@ -108,9 +171,9 @@
 					echo '<label class="sr-only" for="drive1">Drive Name</label>';
 					# Check if we have a name
 					if(!empty($mCfg['disks'][0]['name'])) {
-						echo '<input type="text" size="20" class="form-control" id="drive1" name="drive1" value="' . $mCfg['disks'][0]['name'] . '">';
+						echo '<input type="text" size="20" class="form-control" id="drive1_name" name="drive1_name" value="' . $mCfg['disks'][0]['name'] . '">';
 					}else{
-						echo '<input type="text" size="20" class="form-control" id="drive1" name="drive1" placeholder="Name">';
+						echo '<input type="text" size="20" class="form-control" id="drive1_name" name="drive1_name" placeholder="Name">';
 					}
 					echo '</div>';
 					
@@ -118,9 +181,9 @@
 					echo '<label class="sr-only" for="drive2">Drive Path</label>';
 					# Check if we have a location
 					if(!empty($mCfg['disks'][0]['location'])) {
-						echo '<input type="text" size="20" class="form-control" id="drive1" name="drive1" value="' . $mCfg['disks'][0]['location'] . '">';
+						echo '<input type="text" size="20" class="form-control" id="drive1_loc" name="drive1_loc" value="' . $mCfg['disks'][0]['location'] . '">';
 					}else{
-						echo '<input type="text" size="20" class="form-control" id="drive1" name="drive1" placeholder="Path">';
+						echo '<input type="text" size="20" class="form-control" id="drive1_loc" name="drive1_loc" placeholder="Path">';
 					}
 					echo '</div>';
 					
@@ -128,9 +191,9 @@
 					echo '<label class="sr-only" for="drive3">Alert Limit</label>';
 					# Check if we have a limit
 					if(!empty($mCfg['disks'][0]['limit'])) {
-						echo '<input type="text" size="9" class="form-control" id="drive1" name="drive1" value="' . $mCfg['disks'][0]['limit'] . '">';
+						echo '<input type="text" size="9" class="form-control" id="drive1_limit" name="drive1_limit" value="' . $mCfg['disks'][0]['limit'] . '">';
 					}else{
-						echo '<input type="text" size="9" class="form-control" id="drive1" name="drive1" placeholder="Limit">';
+						echo '<input type="text" size="9" class="form-control" id="drive1_limit" name="drive1_limit" placeholder="Limit">';
 					}
 					echo '</div>';
 					
@@ -141,9 +204,9 @@
 					echo '<label class="sr-only" for="drive1">Drive Name</label>';
 					# Check if we have a name
 					if(!empty($mCfg['disks'][1]['name'])) {
-						echo '<input type="text" size="20" class="form-control" id="drive2" name="drive2" value="' . $mCfg['disks'][1]['name'] . '">';
+						echo '<input type="text" size="20" class="form-control" id="drive2_name" name="drive2_name" value="' . $mCfg['disks'][1]['name'] . '">';
 					}else{
-						echo '<input type="text" size="20" class="form-control" id="drive2" name="drive2" placeholder="Name">';
+						echo '<input type="text" size="20" class="form-control" id="drive2_name" name="drive2_name" placeholder="Name">';
 					}
 					echo '</div>';
 					
@@ -151,9 +214,9 @@
 					echo '<label class="sr-only" for="drive2">Drive Path</label>';
 					# Check if we have a location
 					if(!empty($mCfg['disks'][1]['location'])) {
-						echo '<input type="text" size="20" class="form-control" id="drive2" name="drive2" value="' . $mCfg['disks'][1]['location'] . '">';
+						echo '<input type="text" size="20" class="form-control" id="drive2_loc" name="drive2_loc" value="' . $mCfg['disks'][1]['location'] . '">';
 					}else{
-						echo '<input type="text" size="20" class="form-control" id="drive2" name="drive2" placeholder="Path">';
+						echo '<input type="text" size="20" class="form-control" id="drive2_loc" name="drive2_loc" placeholder="Path">';
 					}
 					echo '</div>';
 					
@@ -161,9 +224,9 @@
 					echo '<label class="sr-only" for="drive3">Alert Limit</label>';
 					# Check if we have a limit
 					if(!empty($mCfg['disks'][1]['limit'])) {
-						echo '<input type="text" size="9" class="form-control" id="drive2" name="drive2" value="' . $mCfg['disks'][1]['limit'] . '">';
+						echo '<input type="text" size="9" class="form-control" id="drive2_limit" name="drive2_limit" value="' . $mCfg['disks'][1]['limit'] . '">';
 					}else{
-						echo '<input type="text" size="9" class="form-control" id="drive2" name="drive2" placeholder="Limit">';
+						echo '<input type="text" size="9" class="form-control" id="drive2_limit" name="drive2_limit" placeholder="Limit">';
 					}
 					echo '</div>';
 					
@@ -174,9 +237,9 @@
 					echo '<label class="sr-only" for="drive1">Drive Name</label>';
 					# Check if we have a name
 					if(!empty($mCfg['disks'][2]['name'])) {
-						echo '<input type="text" size="20" class="form-control" id="drive3" name="drive3" value="' . $mCfg['disks'][2]['name'] . '">';
+						echo '<input type="text" size="20" class="form-control" id="drive3_name" name="drive3_name" value="' . $mCfg['disks'][2]['name'] . '">';
 					}else{
-						echo '<input type="text" size="20" class="form-control" id="drive3" name="drive3" placeholder="Name">';
+						echo '<input type="text" size="20" class="form-control" id="drive3_name" name="drive3_name" placeholder="Name">';
 					}
 					echo '</div>';
 					
@@ -184,9 +247,9 @@
 					echo '<label class="sr-only" for="drive2">Drive Path</label>';
 					# Check if we have a location
 					if(!empty($mCfg['disks'][2]['location'])) {
-						echo '<input type="text" size="20" class="form-control" id="drive3" name="drive3" value="' . $mCfg['disks'][2]['location'] . '">';
+						echo '<input type="text" size="20" class="form-control" id="drive3_loc" name="drive3_loc" value="' . $mCfg['disks'][2]['location'] . '">';
 					}else{
-						echo '<input type="text" size="20" class="form-control" id="drive3" name="drive3" placeholder="Path">';
+						echo '<input type="text" size="20" class="form-control" id="drive3_loc" name="drive3_loc" placeholder="Path">';
 					}
 					echo '</div>';
 					
@@ -194,9 +257,9 @@
 					echo '<label class="sr-only" for="drive3">Alert Limit</label>';
 					# Check if we have a limit
 					if(!empty($mCfg['disks'][2]['limit'])) {
-						echo '<input type="text" size="9" class="form-control" id="drive3" name="drive3" value="' . $mCfg['disks'][2]['limit'] . '">';
+						echo '<input type="text" size="9" class="form-control" id="drive3_limit" name="drive3_limit" value="' . $mCfg['disks'][2]['limit'] . '">';
 					}else{
-						echo '<input type="text" size="9" class="form-control" id="drive3" name="drive3" placeholder="Limit">';
+						echo '<input type="text" size="9" class="form-control" id="drive3_limit" name="drive3_limit" placeholder="Limit">';
 					}
 					echo '</div>';
 					
@@ -207,9 +270,9 @@
 					echo '<label class="sr-only" for="drive1">Drive Name</label>';
 					# Check if we have a name
 					if(!empty($mCfg['disks'][3]['name'])) {
-						echo '<input type="text" size="20" class="form-control" id="drive4" name="drive4" value="' . $mCfg['disks'][3]['name'] . '">';
+						echo '<input type="text" size="20" class="form-control" id="drive4_name" name="drive4_name" value="' . $mCfg['disks'][3]['name'] . '">';
 					}else{
-						echo '<input type="text" size="20" class="form-control" id="drive4" name="drive4" placeholder="Name">';
+						echo '<input type="text" size="20" class="form-control" id="drive4_name" name="drive4_name" placeholder="Name">';
 					}
 					echo '</div>';
 					
@@ -217,9 +280,9 @@
 					echo '<label class="sr-only" for="drive2">Drive Path</label>';
 					# Check if we have a location
 					if(!empty($mCfg['disks'][3]['location'])) {
-						echo '<input type="text" size="20" class="form-control" id="drive4" name="drive4" value="' . $mCfg['disks'][3]['location'] . '">';
+						echo '<input type="text" size="20" class="form-control" id="drive4_loc" name="drive4_loc" value="' . $mCfg['disks'][3]['location'] . '">';
 					}else{
-						echo '<input type="text" size="20" class="form-control" id="drive4" name="drive4" placeholder="Path">';
+						echo '<input type="text" size="20" class="form-control" id="drive4_loc" name="drive4_loc" placeholder="Path">';
 					}
 					echo '</div>';
 					
@@ -227,9 +290,9 @@
 					echo '<label class="sr-only" for="drive3">Alert Limit</label>';
 					# Check if we have a limit
 					if(!empty($mCfg['disks'][3]['limit'])) {
-						echo '<input type="text" size="9" class="form-control" id="drive4" name="drive4" value="' . $mCfg['disks'][3]['limit'] . '">';
+						echo '<input type="text" size="9" class="form-control" id="drive4_limit" name="drive4_limit" value="' . $mCfg['disks'][3]['limit'] . '">';
 					}else{
-						echo '<input type="text" size="9" class="form-control" id="drive4" name="drive4" placeholder="Limit">';
+						echo '<input type="text" size="9" class="form-control" id="drive4_limit" name="drive4_limit" placeholder="Limit">';
 					}
 					echo '</div>';
 					
@@ -240,9 +303,9 @@
 					echo '<label class="sr-only" for="drive1">Drive Name</label>';
 					# Check if we have a name
 					if(!empty($mCfg['disks'][4]['name'])) {
-						echo '<input type="text" size="20" class="form-control" id="drive5" name="drive5" value="' . $mCfg['disks'][4]['name'] . '">';
+						echo '<input type="text" size="20" class="form-control" id="drive5_name" name="drive5_name" value="' . $mCfg['disks'][4]['name'] . '">';
 					}else{
-						echo '<input type="text" size="20" class="form-control" id="drive5" name="drive5" placeholder="Name">';
+						echo '<input type="text" size="20" class="form-control" id="drive5_name" name="drive5_name" placeholder="Name">';
 					}
 					echo '</div>';
 					
@@ -250,9 +313,9 @@
 					echo '<label class="sr-only" for="drive2">Drive Path</label>';
 					# Check if we have a location
 					if(!empty($mCfg['disks'][4]['location'])) {
-						echo '<input type="text" size="20" class="form-control" id="drive5" name="drive5" value="' . $mCfg['disks'][4]['location'] . '">';
+						echo '<input type="text" size="20" class="form-control" id="drive5_loc" name="drive5_loc" value="' . $mCfg['disks'][4]['location'] . '">';
 					}else{
-						echo '<input type="text" size="20" class="form-control" id="drive5" name="drive5" placeholder="Path">';
+						echo '<input type="text" size="20" class="form-control" id="drive5_loc" name="drive5_loc" placeholder="Path">';
 					}
 					echo '</div>';
 					
@@ -260,9 +323,9 @@
 					echo '<label class="sr-only" for="drive3">Alert Limit</label>';
 					# Check if we have a limit
 					if(!empty($mCfg['disks'][4]['limit'])) {
-						echo '<input type="text" size="9" class="form-control" id="drive5" name="drive5" value="' . $mCfg['disks'][4]['limit'] . '">';
+						echo '<input type="text" size="9" class="form-control" id="drive5_limit" name="drive5_limit" value="' . $mCfg['disks'][4]['limit'] . '">';
 					}else{
-						echo '<input type="text" size="9" class="form-control" id="drive5" name="drive5" placeholder="Limit">';
+						echo '<input type="text" size="9" class="form-control" id="drive5_limit" name="drive5_limit" placeholder="Limit">';
 					}
 					echo '</div><hr>';
 					
@@ -272,7 +335,7 @@
 					echo '<br /><h5>Contact 1</h5>';
 					echo '<div class="form-group" style="width:49%;">';
 					echo '<label class="sr-only" for="drive1">Contact Email</label>';
-					# Check if we have a name
+					# Check if we have an email
 					if(!empty($mCfg['contacts']['email_1'])) {
 						echo '<input type="text" size="28" class="form-control" id="email1" name="email1" value="' . $mCfg['contacts']['email_1'] . '">';
 					}else{
@@ -282,7 +345,7 @@
 					
 					echo '<div class="form-group" style="width:51%;">';
 					echo '<label class="sr-only" for="drive2">Contact Number</label>';
-					# Check if we have a location
+					# Check if we have a phone #
 					if(!empty($mCfg['contacts']['mobile_1'])) {
 						echo '<input type="text" size="30" class="form-control" id="number1" name="number1" value="' . $mCfg['contacts']['mobile_1'] . '">';
 					}else{
@@ -290,6 +353,55 @@
 					}
 					echo '</div>';
 					
+					############# CONTACT TWO
+					echo '<br /><h5>Contact 2</h5>';
+					echo '<div class="form-group" style="width:49%;">';
+					echo '<label class="sr-only" for="drive1">Contact Email</label>';
+					# Check if we have an email
+					if(!empty($mCfg['contacts']['email_2'])) {
+						echo '<input type="text" size="28" class="form-control" id="email2" name="email2" value="' . $mCfg['contacts']['email_2'] . '">';
+					}else{
+						echo '<input type="text" size="28" class="form-control" id="email2" name="email2" placeholder="Email">';
+					}
+					echo '</div>';
+					
+					echo '<div class="form-group" style="width:51%;">';
+					echo '<label class="sr-only" for="drive2">Contact Number</label>';
+					# Check if we have a phone #
+					if(!empty($mCfg['contacts']['mobile_2'])) {
+						echo '<input type="text" size="30" class="form-control" id="number2" name="number2" value="' . $mCfg['contacts']['mobile_2'] . '">';
+					}else{
+						echo '<input type="text" size="30" class="form-control" id="number2" name="number2" placeholder="Number">';
+					}
+					echo '</div>';
+
+					############# CONTACT THREE
+					echo '<br /><h5>Contact 3</h5>';
+					echo '<div class="form-group" style="width:49%;">';
+					echo '<label class="sr-only" for="drive1">Contact Email</label>';
+					# Check if we have an email
+					if(!empty($mCfg['contacts']['email_3'])) {
+						echo '<input type="text" size="28" class="form-control" id="email3" name="email3" value="' . $mCfg['contacts']['email_3'] . '">';
+					}else{
+						echo '<input type="text" size="28" class="form-control" id="email3" name="email3" placeholder="Email">';
+					}
+					echo '</div>';
+
+					echo '<div class="form-group" style="width:51%;">';
+					echo '<label class="sr-only" for="drive2">Contact Number</label>';
+					# Check if we have a phone #
+					if(!empty($mCfg['contacts']['mobile_3'])) {
+						echo '<input type="text" size="30" class="form-control" id="number3" name="number3" value="' . $mCfg['contacts']['mobile_3'] . '">';
+					}else{
+						echo '<input type="text" size="30" class="form-control" id="number3" name="number3" placeholder="Number">';
+					}
+					echo '</div><hr>';
+
+					echo '<h4>Update Password</h4>';
+
+					echo '<br /><h5>Password</h5>';
+					echo '<input type="password" size="64" class="form-control" id="password" name="password" placeholder="Leave blank for no change">';
+
 					echo '<pre>';
 					print_r($mCfg);
 					echo '</pre>';
@@ -297,8 +409,9 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="submit" class="btn btn-primary">Save changes</button>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>
