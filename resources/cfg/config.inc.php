@@ -32,20 +32,9 @@
 		'email_personal' => 'alex@paq.nz'
 	);
 	
-	# Disk configuration
-	$Cfg_disks = array(
-		0 => array(
-			'name' => 'OS SSD',
-			'location' => '/',
-			'limit' => '80' # (%)
-		),
-	);
-	
 	# The limits that must be reached to send out alerts
 	$Cfg_limits = array(
-		'memory_usage' => '75', # (%)
-		'memory_units' => 'mb',
-		'load_alert' => '6'
+		'memory_units' => 'mb'
 	);
 	
 	#######################
@@ -72,7 +61,14 @@
 			# Going into alarm
 			if(!empty($Limit)) {
 				# Should we add a %?
-				if($Type == 'disk_usage' or $Type == 'memory_usage') {
+				//if($Type == 'disk_usage') {
+				if(strpos($Type, 'disk_usage') !== false) {
+					$mkArray = array(
+						'type' => $Type,
+						'limit' => $Limit . '%',
+						'time' => $cTime
+					);
+				}else if($Type == 'memory_usage') {
 					$mkArray = array(
 						'type' => $Type,
 						'limit' => $Limit[$Type] . '%',
@@ -308,6 +304,16 @@
 			
 			# ...and then put it inside the new file
 			file_put_contents(__DIR__ . '/../data/config.json', $jsonData);
+		}
+		
+		function LoadConfig() {
+			if(file_exists(__DIR__ . '/../data/config.json')) {
+				$cfgCont = file_get_contents(__DIR__ . '/../data/config.json');
+		
+				$cfgCont = json_decode($cfgCont, true);
+		
+				return $cfgCont;
+			}
 		}
 	}
 ?>
