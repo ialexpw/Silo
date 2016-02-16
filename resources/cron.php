@@ -3,6 +3,9 @@
 	error_reporting(E_ALL);
 
 	include 'cfg/config.inc.php';
+	
+	# Load the config file
+	$mCfg = $Montr->LoadConfig();
 
 	# Create daily log file
 	$mtLog = $Montr->CreateLog();
@@ -14,7 +17,7 @@
 	$ServerLoad = $Montr->getLoad();
 	
 	# Disk limits are done separate due to multiple disks
-	foreach($Cfg_disks as $Disk) {
+	foreach($mCfg['disks'] as $Disk) {
 		# Initialise as disk_usage
 		$type = 'disk_usage';
 		
@@ -29,10 +32,10 @@
 					fopen(__DIR__ . '/data/disk_usage_' . $Montr->makeSlug($Disk['name']), 'w');
 					
 					# Alert was not sent before, send it
-					$Montr->sendAlerts($type . ' - ' . $Montr->makeSlug($Disk['name']), $Cfg_contacts, $Cfg_general);
+					$Montr->sendAlerts($type . ' - ' . $Montr->makeSlug($Disk['name']), $mCfg['contacts'], $Cfg_general);
 					
 					# Write to the daily log file
-					$Montr->WriteLog($type . ' - ' . $Montr->makeSlug($Disk['name']), $Cfg_limits);
+					$Montr->WriteLog($type . ' - ' . $Montr->makeSlug($Disk['name']), $Disk['limit']);
 				}
 			}else{
 				# Coming out of an alarm? Remove the alarm file
@@ -42,7 +45,7 @@
 					# Send an alert once it's cleared?
 					if($Cfg_general['alert_on_clear']) {
 						# Alert was not sent before, send it
-						$Montr->sendAlerts($type . '_cleared - ', $Cfg_contacts, $Cfg_general);
+						$Montr->sendAlerts($type . '_cleared - ', $mCfg['contacts'], $Cfg_general);
 					}
 					
 					# Write to the daily log file
@@ -53,42 +56,7 @@
 	}
 	
 	# Loop through all our limits
-	foreach($Cfg_limits as $type => $limit) {
-		# Disk usage
-		if($type == 'disk_usage') {
-			foreach($Cfg_location as $Disk => $Location) {
-				# Disk usage
-				$DiskUsage = $Montr->getDisk($Location);
-				
-				if($DiskUsage['percent'] > $limit) {
-					# Check if the alert was sent before
-					if(!file_exists(__DIR__ . '/data/disk_usage_' . $Montr->makeSlug($Disk))) {
-						fopen(__DIR__ . '/data/disk_usage_' . $Montr->makeSlug($Disk), 'w');
-						
-						# Alert was not sent before, send it
-						$Montr->sendAlerts($type, $Cfg_contacts, $Cfg_general);
-						
-						# Write to the daily log file
-						$Montr->WriteLog($type, $Cfg_limits);
-					}
-				}else{
-					# Coming out of alarm? Remove the alarm file
-					if(file_exists(__DIR__ . '/data/disk_usage_' . $Montr->makeSlug($Disk))) {
-						unlink(__DIR__ . '/data/disk_usage_' . $Montr->makeSlug($Disk));
-						
-						# Send an alert once it's cleared?
-						if($Cfg_general['alert_on_clear']) {
-							# Alert was not sent before, send it
-							$Montr->sendAlerts($type . '_cleared', $Cfg_contacts, $Cfg_general);
-						}
-						
-						# Write to the daily log file
-						$Montr->WriteLog($type . '_cleared');
-					}
-				}
-			}
-		}
-		
+	foreach($mCfg['limits'] as $type => $limit) {
 		# Memory usage
 		if($type == 'memory_usage') {
 			if($MemoryUsage['percent'] > $limit) {
@@ -97,10 +65,10 @@
 					fopen(__DIR__ . '/data/memory_usage', 'w');
 					
 					# Alert was not sent before, send it
-					$Montr->sendAlerts($type, $Cfg_contacts, $Cfg_general);
+					$Montr->sendAlerts($type, $mCfg['contacts'], $Cfg_general);
 					
 					# Write to the daily log file
-					$Montr->WriteLog($type, $Cfg_limits);
+					$Montr->WriteLog($type, $mCfg['limits']);
 				}
 			}else{
 				# Coming out of alarm? Remove the alarm file 
@@ -110,7 +78,7 @@
 					# Send an alert once it's cleared?
 					if($Cfg_general['alert_on_clear']) {
 						# Alert was not sent before, send it
-						$Montr->sendAlerts($type . '_cleared', $Cfg_contacts, $Cfg_general);
+						$Montr->sendAlerts($type . '_cleared', $mCfg['contacts'], $Cfg_general);
 					}
 					
 					# Write to the daily log file
@@ -127,10 +95,10 @@
 					fopen(__DIR__ . '/data/load_alert', 'w');
 					
 					# Alert was not sent before, send it
-					$Montr->sendAlerts($type, $Cfg_contacts, $Cfg_general);
+					$Montr->sendAlerts($type, $mCfg['contacts'], $Cfg_general);
 					
 					# Write to the daily log file
-					$Montr->WriteLog($type, $Cfg_limits);
+					$Montr->WriteLog($type, $mCfg['limits']);
 				}
 			}else{
 				# Coming out of alarm? Remove the alarm file
@@ -140,7 +108,7 @@
 					# Send an alert once it's cleared?
 					if($Cfg_general['alert_on_clear']) {
 						# Alert was not sent before, send it
-						$Montr->sendAlerts($type . '_cleared', $Cfg_contacts, $Cfg_general);
+						$Montr->sendAlerts($type . '_cleared', $mCfg['contacts'], $Cfg_general);
 					}
 					
 					# Write to the daily log file
