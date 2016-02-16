@@ -278,11 +278,6 @@
 				$mkLog = fopen(__DIR__ . '/../data/config.json', 'w') or die('Please ensure the data folder is writable');
 			}
 			
-			# Default configuration
-			$defCfg = array(
-				
-			);
-			
 			# Hash the password
 			$stPass = password_hash('password', PASSWORD_BCRYPT);
 			
@@ -298,8 +293,8 @@
 					),
 				),
 				'contacts' => array(
-					'mobile_personal' => '447711868356',
-					'email_alerts' => 'alerts@paq.nz'
+					'mobile_1' => '447711868356',
+					'email_1' => 'alerts@paq.nz'
 				),
 				'limits' => array(
 					'memory_usage' => '75', # (%)
