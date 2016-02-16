@@ -1,5 +1,8 @@
 <?php
 	include 'cfg/config.inc.php';
+	
+	# Load the config file
+	$mCfg = $Montr->LoadConfig();
 
 	# System load
 	$SystemLoad = $Montr->getLoad();
@@ -55,7 +58,7 @@
 		<p align="center"><i class="fa fa-hdd-o fa-4x"></i></p>
 		<h4 align="center">Disk Usage</h4>
 		<?php
-			foreach($Cfg_disks as $Disk) {
+			foreach($mCfg['disks'] as $Disk) {
 				# Disk usage
 				$DiskUsage = $Montr->getDisk($Disk['location']);
 		?>
@@ -95,9 +98,9 @@
 			</div>
 			<?php
 				# Add the alert limit
-				if(isset($Cfg_limits['memory_usage']) && !empty($Cfg_limits['memory_usage'])) {
+				if(isset($mCfg['limits']['memory_usage']) && !empty($mCfg['limits']['memory_usage'])) {
 					# Work out where it should be
-					$AlertLimit_Memory = 100 - $Cfg_limits['memory_usage'];
+					$AlertLimit_Memory = 100 - $mCfg['limits']['memory_usage'];
 					echo '<div style="width: 4px; height: 12px; position: absolute; background: #FF6961; top: 0; right: ' . $AlertLimit_Memory . '%;" data-toggle="tooltip" data-placement="bottom" title="Alert Limit - ' . (100-$AlertLimit_Memory) . '%"></div>';
 				}
 			?>
