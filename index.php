@@ -26,7 +26,7 @@
 		
 		# Build the drive array
 		for($i=0;$i<5;$i++) {
-			if(!empty($_POST['drive' . ($i+1) . '_name']) && !empty($_POST['drive' . ($i+1) . '_loc']) && !empty($_POST['drive' . ($i+1) . '_limit'])) {
+			if(!empty($_POST['drive' . ($i+1) . '_name']) && !empty($_POST['drive' . ($i+1) . '_loc']) && isset($_POST['drive' . ($i+1) . '_limit'])) {
 				$defCfg['disks'][$i]['name'] = $_POST['drive' . ($i+1) . '_name'];
 				$defCfg['disks'][$i]['location'] = $_POST['drive' . ($i+1) . '_loc'];
 				$defCfg['disks'][$i]['limit'] = $_POST['drive' . ($i+1) . '_limit'];
@@ -48,12 +48,12 @@
 		}
 		
 		# Memory usage alert percentage
-		if(!empty($_POST['mem_level'])) {
+		if(isset($_POST['mem_level'])) {
 			$defCfg['limits']['memory_usage'] = $_POST['mem_level'];
 		}
 		
 		# Load alert level
-		if(!empty($_POST['load_level'])) {
+		if(isset($_POST['load_level'])) {
 			$defCfg['limits']['load_alert'] = $_POST['load_level'];
 		}
 		
@@ -200,7 +200,7 @@
 
 								echo '<label class="sr-only" for="drive3">Alert Limit</label>';
 								# Check if we have a limit
-								if(!empty($mCfg['disks'][0]['limit'])) {
+								if(isset($mCfg['disks'][0]['limit'])) {
 									echo '<input type="text" size="10" class="form-control" id="drive1_limit" name="drive1_limit" placeholder="Limit" value="' . $mCfg['disks'][0]['limit'] . '">';
 								}else{
 									echo '<input type="text" size="10" class="form-control" id="drive1_limit" name="drive1_limit" placeholder="Limit">';
@@ -229,7 +229,7 @@
 
 								echo '<label class="sr-only" for="drive3">Alert Limit</label>';
 								# Check if we have a limit
-								if(!empty($mCfg['disks'][1]['limit'])) {
+								if(isset($mCfg['disks'][1]['limit'])) {
 									echo '<input type="text" size="10" class="form-control" id="drive2_limit" name="drive2_limit" placeholder="Limit" value="' . $mCfg['disks'][1]['limit'] . '">';
 								}else{
 									echo '<input type="text" size="10" class="form-control" id="drive2_limit" name="drive2_limit" placeholder="Limit">';
@@ -258,7 +258,7 @@
 
 								echo '<label class="sr-only" for="drive3">Alert Limit</label>';
 								# Check if we have a limit
-								if(!empty($mCfg['disks'][2]['limit'])) {
+								if(isset($mCfg['disks'][2]['limit'])) {
 									echo '<input type="text" size="10" class="form-control" id="drive3_limit" name="drive3_limit" placeholder="Limit" value="' . $mCfg['disks'][2]['limit'] . '">';
 								}else{
 									echo '<input type="text" size="10" class="form-control" id="drive3_limit" name="drive3_limit" placeholder="Limit">';
@@ -287,7 +287,7 @@
 
 								echo '<label class="sr-only" for="drive3">Alert Limit</label>';
 								# Check if we have a limit
-								if(!empty($mCfg['disks'][3]['limit'])) {
+								if(isset($mCfg['disks'][3]['limit'])) {
 									echo '<input type="text" size="10" class="form-control" id="drive4_limit" name="drive4_limit" placeholder="Limit" value="' . $mCfg['disks'][3]['limit'] . '">';
 								}else{
 									echo '<input type="text" size="10" class="form-control" id="drive4_limit" name="drive4_limit" placeholder="Limit">';
@@ -316,7 +316,7 @@
 
 								echo '<label class="sr-only" for="drive3">Alert Limit</label>';
 								# Check if we have a limit
-								if(!empty($mCfg['disks'][4]['limit'])) {
+								if(isset($mCfg['disks'][4]['limit'])) {
 									echo '<input type="text" size="10" class="form-control" id="drive5_limit" name="drive5_limit" placeholder="Limit" value="' . $mCfg['disks'][4]['limit'] . '">';
 								}else{
 									echo '<input type="text" size="10" class="form-control" id="drive5_limit" name="drive5_limit" placeholder="Limit">';
@@ -408,7 +408,7 @@
 								echo '<div class="form-group">';
 								echo '<label class="sr-only" for="drive1">Memory percentage alert level</label>';
 								# Check if we have an email
-								if(!empty($mCfg['limits']['memory_usage'])) {
+								if(isset($mCfg['limits']['memory_usage'])) {
 									echo '<input type="text" class="form-control pdR" id="mem_level" name="mem_level" placeholder="Memory usage percentage" value="' . $mCfg['limits']['memory_usage'] . '">';
 								}else{
 									echo '<input type="text" class="form-control pdR" id="mem_level" name="mem_level" placeholder="Memory usage percentage">';
@@ -416,7 +416,7 @@
 
 								echo '<label class="sr-only" for="drive2">Load alert level</label>';
 								# Check if we have a phone #
-								if(!empty($mCfg['limits']['load_alert'])) {
+								if(isset($mCfg['limits']['load_alert'])) {
 									echo '<input type="text" class="form-control" id="load_level" name="load_level" placeholder="Load max level" value="' . $mCfg['limits']['load_alert'] . '">';
 								}else{
 									echo '<input type="text" class="form-control" id="load_level" name="load_level" placeholder="Load max level">';
