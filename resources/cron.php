@@ -58,7 +58,7 @@
 	# Loop through all our limits
 	foreach($mCfg['limits'] as $type => $limit) {
 		# Memory usage
-		if($type == 'memory_usage') {
+		if($type == 'memory_usage' && $limit > 0) {
 			if($MemoryUsage['percent'] > $limit) {
 				# Check if the alert was sent before
 				if(!file_exists(__DIR__ . '/data/memory_usage')) {
@@ -88,7 +88,7 @@
 		}
 		
 		# Load alerts
-		if($type == 'load_alert') {
+		if($type == 'load_alert' && $limit > 0) {
 			if($ServerLoad['one'] > $limit) {
 				# Check if the alert was sent before
 				if(!file_exists(__DIR__ . '/data/load_alert')) {
