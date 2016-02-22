@@ -1,6 +1,14 @@
 <?php
 	# Start the session
 	InitSession();
+	
+	//if(is_dir('/var/www/')) {
+	//	echo 'true';
+	//}
+	
+	//if(file_exists('/var/www/')) {
+	//	echo 'true';
+	//}
 
 	# Load the config file
 	$mCfg = LoadConfig();
@@ -57,9 +65,10 @@
 			$defCfg['limits']['load_alert'] = $_POST['load_level'];
 		}
 		
+		# Encode the array into json
 		$defCfg = json_encode($defCfg);
 		
-		# Write the new file
+		# Write the new configuration file
 		file_put_contents(__DIR__ . '/resources/data/config.json', $defCfg);
 		
 		# Redirect back to refresh
@@ -106,7 +115,6 @@
 					</ul>
 					<?php
 						if(isset($_SESSION['Authenticated'])) {
-							//echo '<p class="navbar-text navbar-right" style="margin-right:15px;">Authenticated</p>';
 							echo '<button type="button" style="margin-right:15px; margin-top:10px;" class="btn btn-primary btn-sm navbar-right" data-toggle="modal" data-target="#myModal">Configuration</button>';
 						}else{
 							echo '<form method="post" class="navbar-form navbar-right" role="search">';
@@ -461,6 +469,7 @@
 	</div>
 </div>
 <?php
+	# Function to load the configuration file into an array
 	function LoadConfig() {
 		if(file_exists(__DIR__ . '/resources/data/config.json')) {
 			$cfgCont = file_get_contents(__DIR__ . '/resources/data/config.json');
