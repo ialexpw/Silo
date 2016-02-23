@@ -6,9 +6,6 @@
 	
 	# Load the config file
 	$mCfg = $Montr->LoadConfig();
-
-	# Create daily log file
-	$mtLog = $Montr->CreateLog();
 	
 	# Server load
 	$MemoryUsage = $Montr->getMemory();

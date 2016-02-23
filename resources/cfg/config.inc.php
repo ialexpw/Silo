@@ -42,8 +42,8 @@
 	#######################
 	
 	class Montr {
-		function CreateLog() {
-			# Get the day
+		function WriteLog($Type, $Limit='') {
+			# Get the day/time
 			$cTime = time();
 			
 			# Check if we have an alert log
@@ -52,11 +52,6 @@
 			}else{
 				$mkAlertLog = fopen(__DIR__ . '/../data/alerts_' . date('d-m-y', $cTime) . '.json', 'w') or die('Please ensure the data folder is writable');
 			}
-		}
-		
-		function WriteLog($Type, $Limit='') {
-			# Get the day/time
-			$cTime = time();
 			
 			# Going into alarm
 			if(!empty($Limit)) {
