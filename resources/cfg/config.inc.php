@@ -24,14 +24,6 @@
 		'alert_on_clear' => 0
 	);
 	
-	# Who to contact when an alert is triggered
-	$Cfg_contacts = array(
-		'mobile_personal' => '447711868356',
-		'mobile_work' => '447867396980',
-		'email_alerts' => 'alerts@paq.nz',
-		'email_personal' => 'alex@paq.nz'
-	);
-	
 	# The limits that must be reached to send out alerts
 	$Cfg_limits = array(
 		'memory_units' => 'mb'
