@@ -1,17 +1,25 @@
 <?php
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+
 	# Start the session
 	InitSession();
-	
-	//if(is_dir('/var/www/')) {
-	//	echo 'true';
-	//}
-	
-	//if(file_exists('/var/www/')) {
-	//	echo 'true';
-	//}
 
 	# Load the config file
 	$mCfg = LoadConfig();
+
+	# Load the SSH library
+	include('resources/lib/phpSec/Net/SSH2.php');
+
+	$ssh = new Net_SSH2($_SERVER['SERVER_NAME']);
+
+	if(!$ssh->login('root', 'Al3xWhit3')) {
+		exit('Login Failed');
+	}
+
+	//echo $ssh->exec('pwd');
+	//echo $ssh->exec('ls -la');
 
 	# Authenticating
 	if(!empty($_POST['authPass']) && !empty($mCfg)) {
@@ -78,7 +86,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Montr - Resource Monitoring</title>		
+		<title>Silo - Resource Panel</title>		
 		<link type="text/css" rel="stylesheet" href="resources/style/css/bootstrap.min.css" media="screen,projection"/>
 		<link type="text/css" rel="stylesheet" href="resources/style/css/font-awesome.min.css" media="screen"/>
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -104,7 +112,7 @@
 					</button>
 					<a class="navbar-brand" href="index.php">
 						<img alt="" class="menuimg" />
-						<p class="logo_letter">m</p>
+						<p class="logo_letter">s</p>
 					</a>
 				</div>
 				
@@ -129,7 +137,7 @@
         <div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<p align="center" class="title">montr</p>
+					<p align="center" class="title">silo</p>
 					<div class="fill-in">
 
 					</div>
@@ -172,6 +180,7 @@
 						<li role="presentation"><a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab">Contacts</a></li>
 						<li role="presentation"><a href="#limits" aria-controls="limits" role="tab" data-toggle="tab">Limits</a></li>
 						<li role="presentation"><a href="#password" aria-controls="settings" role="tab" data-toggle="tab">Password</a></li>
+						<li role="presentation"><a href="#control" aria-controls="control" role="tab" data-toggle="tab">Control</a></li>
 						<li role="presentation"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">About</a></li>
 					</ul>
 					
@@ -442,6 +451,34 @@
 							
 							<?php
 								echo '<h5>Password</h5>';
+								echo '<input type="password" size="64" class="form-control" id="password" name="password" placeholder="Leave blank for no change">';
+							?>
+						</div>
+							
+						<div role="tabpanel" class="tab-pane" id="control">
+							<h4>Server Control</h4>
+							
+							<p>If you allow it, Silo can run simple commands for you on your server. Silo does not store any sensitive information about your server and only uses it to execute
+							the commands that you select.</p>
+							
+							<hr>
+							
+							<?php
+								echo '<h5>Options</h5>';							
+								echo '<div class="radio">';
+								echo '<label>';
+								echo '<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>';
+								echo ' Reboot';
+								echo '</label>';
+								echo '</div>';
+								echo '<br />';
+								echo '<div class="radio">';
+								echo '<label>';
+								echo '<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">';
+								echo ' Shutdown';
+								echo '</label>';
+								echo '</div>';
+							
 								echo '<input type="password" size="64" class="form-control" id="password" name="password" placeholder="Leave blank for no change">';
 							?>
 						</div>
