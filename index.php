@@ -9,18 +9,6 @@
 	# Load the config file
 	$mCfg = LoadConfig();
 
-	# Load the SSH library
-	include('resources/lib/phpSec/Net/SSH2.php');
-
-	$ssh = new Net_SSH2($_SERVER['SERVER_NAME']);
-
-	if(!$ssh->login('root', 'Al3xWhit3')) {
-		exit('Login Failed');
-	}
-
-	//echo $ssh->exec('pwd');
-	//echo $ssh->exec('ls -la');
-
 	# Authenticating
 	if(!empty($_POST['authPass']) && !empty($mCfg)) {
 		if(password_verify($_POST['authPass'], $mCfg['auth']['password'])) {
@@ -161,9 +149,35 @@
 				$('.fill-in').load('resources/load.php').stop().fadeIn();
 			}, 5000);
 		</script>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$("#submit-button").click(function (e) {
+					e.preventDefault();
+		
+					var username = $('#ssh-username').val();
+					var password = $('#ssh-password').val();
+					var post = $('#custom').val();
+		
+					var option = $('input[name="sshSelect"]:checked').val();
+		
+					$.ajax({ 
+						type:"POST",
+						url:"resources/ssh_post.php",
+						data: {username: username, password: password, command: post, option: option},
+						success: function(data){
+							 $(".result").html(data);
+						}
+					});
+				});
+			});
+		</script>
 	</body>
 </html>
-
+<?php
+	if(isset($_SESSION['Authenticated']) && $_SESSION['Authenticated'] == 1) {
+?>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
@@ -463,35 +477,60 @@
 							
 							<hr>
 							
-							<?php
-								echo '<h5>Options</h5>';							
-								echo '<div class="radio">';
-								echo '<label>';
-								echo '<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>';
-								echo ' Reboot';
-								echo '</label>';
-								echo '</div>';
-								echo '<br />';
-								echo '<div class="radio">';
-								echo '<label>';
-								echo '<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">';
-								echo ' Shutdown';
-								echo '</label>';
-								echo '</div>';
-							
-								echo '<input type="password" size="64" class="form-control" id="password" name="password" placeholder="Leave blank for no change">';
-							?>
+							<div id="ssh-post" method="post">
+								<div class="radio">
+									<label>
+										<input type="radio" name="sshSelect" id="sshSelect1" value="update" checked>
+										 Update
+									</label>
+								</div>
+								<br />
+								<div class="radio">
+									<label>
+										<input type="radio" name="sshSelect" id="sshSelect2" value="reboot">
+										 Reboot
+									</label>
+								</div>
+								<br />
+								<div class="radio">
+									<label>
+										<input type="radio" name="sshSelect" id="sshSelect3" value="shutdown">
+										 Shutdown
+									</label>
+								</div>
+								<br />
+								<div class="radio">
+									<label>
+										<input type="radio" name="sshSelect" id="sshSelect4" value="custom">
+										 Custom
+									</label>
+								</div>
+								
+								<br />
+								
+								<input type="text" class="form-control" id="custom" name="custom" placeholder="ps aux">
+								
+								<br /><br />
+								
+								<div class="form-group">
+									<input type="text" class="form-control pdR" id="ssh-username" name="ssh-username" placeholder="root">
+									<input type="password" class="form-control pdR" id="ssh-password" name="ssh-password" placeholder="password">
+									<button id="submit-button" class="btn btn-default">Submit</button>
+								</div>
+							</div>
+							<br />
+							<div class="well well-sm result"></div>
 						</div>
 
 						<div role="tabpanel" class="tab-pane" id="about">
-							<h4>About montr</h4>
+							<h4>About Silo</h4>
 							
-							<p>Welcome! montr is a simple resource monitor for servers. It can monitor drive, memory and load usage.</p>
+							<p>Welcome! Silo is a simple resource panel for servers. It can monitor drive, memory and load usage as well as execute SSH commands.</p>
 							
-							<p>montr can send both email and SMS alerts to specified contacts when
+							<p>Silo can send both email and SMS alerts to specified contacts when
 							the alarm thresholds are hit. The SMS notifications are sent via an external service called <a target="_blank" href="https://nexmo.com">Nexmo</a>.</p>
 							
-							<p>If you have any ideas for improvement or general feedback, you can email me at <a href="mailto:montr@paq.nz">montr@paq.nz</a></p>
+							<p>If you have any ideas for improvement or general feedback, you can email me at <a href="mailto:montr@paq.nz">silo@paq.nz</a></p>
 						</div>
 					  </div>
 
@@ -505,7 +544,10 @@
 		</div>
 	</div>
 </div>
+
 <?php
+}
+
 	# Function to load the configuration file into an array
 	function LoadConfig() {
 		if(file_exists(__DIR__ . '/resources/data/config.json')) {
