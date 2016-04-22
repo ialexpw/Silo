@@ -21,7 +21,8 @@
 		
 		# Update/reset/shutdown/custom command
 		if($_POST['option'] == 'update') {
-			echo $ssh->exec('cd /var/www/html && git pull');
+			$prntDir = dirname(dirname(__FILE__));
+			echo $ssh->exec('cd ' . $prntDir . ' && git pull');
 		}else if($_POST['option'] == 'reboot') {
 			echo 'Rebooting';
 			$ssh->exec('reboot');
