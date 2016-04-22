@@ -28,6 +28,17 @@
 			$defCfg['auth']['password'] = $mCfg['auth']['password'];
 		}
 		
+		# Server name
+		if(!empty($_POST['server-name'])) {
+			$defCfg['server']['name'] = $_POST['server-name'];
+		}
+		
+		# Nexmo settings
+		if(!empty($_POST['nexmo-key']) || !empty($_POST['nexmo-secret'])) {
+			$defCfg['nexmo']['key'] = $_POST['nexmo-key'];
+			$defCfg['nexmo']['secret'] = $_POST['nexmo-secret'];
+		}
+		
 		# Build the drive array
 		for($i=0;$i<5;$i++) {
 			if(!empty($_POST['drive' . ($i+1) . '_name']) && !empty($_POST['drive' . ($i+1) . '_loc']) && isset($_POST['drive' . ($i+1) . '_limit'])) {
@@ -195,6 +206,7 @@
 						<li role="presentation"><a href="#limits" aria-controls="limits" role="tab" data-toggle="tab">Limits</a></li>
 						<li role="presentation"><a href="#password" aria-controls="settings" role="tab" data-toggle="tab">Password</a></li>
 						<li role="presentation"><a href="#control" aria-controls="control" role="tab" data-toggle="tab">Control</a></li>
+						<li role="presentation"><a href="#site" aria-controls="site" role="tab" data-toggle="tab">Site</a></li>
 						<li role="presentation"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">About</a></li>
 					</ul>
 					
@@ -510,7 +522,7 @@
 								
 								<input type="text" class="form-control" id="custom" name="custom" placeholder="ps aux">
 								
-								<br /><br />
+								<hr>
 								
 								<div class="form-group">
 									<input type="text" class="form-control pdR" id="ssh-username" name="ssh-username" placeholder="root">
@@ -520,6 +532,48 @@
 							</div>
 							<br />
 							<div class="well well-sm result"></div>
+						</div>
+							
+						<div role="tabpanel" class="tab-pane" id="site">
+							<h4>Site Settings</h4>
+							
+							<p>You can update Site-wide settings here, such as the server name and API credentials for the SMS gateway, Nexmo.</p>
+							
+							<hr>
+							
+							<?php
+								echo '<h5>Server Name</h5>';
+								echo '<div class="form-group">';
+								echo '<label class="sr-only" for="drive1">Server Name</label>';
+								# Check if we have an email
+								if(!empty($mCfg['server']['name'])) {
+									echo '<input type="text" class="form-control pdR" id="server-name" name="server-name" placeholder="Server name" value="' . $mCfg['server']['name'] . '">';
+								}else{
+									echo '<input type="text" class="form-control pdR" id="server-name" name="server-name" placeholder="Server name">';
+								}
+								echo '</div>';
+								
+								echo '<hr>';
+									
+								echo '<h5>Nexmo API</h5>';
+								echo '<div class="form-group">';
+								echo '<label class="sr-only" for="drive1">Nexmo Key</label>';
+								# Check if we have an email
+								if(!empty($mCfg['nexmo']['key'])) {
+									echo '<input type="text" class="form-control pdR" id="nexmo-key" name="nexmo-key" placeholder="Key" value="' . $mCfg['nexmo']['key'] . '">';
+								}else{
+									echo '<input type="text" class="form-control pdR" id="nexmo-key" name="nexmo-key" placeholder="Key">';
+								}
+
+								echo '<label class="sr-only" for="drive2">Nexmo Secret</label>';
+								# Check if we have a phone #
+								if(!empty($mCfg['nexmo']['secret'])) {
+									echo '<input type="text" class="form-control" id="nexmo-secret" name="nexmo-secret" placeholder="Secret" value="' . $mCfg['nexmo']['secret'] . '">';
+								}else{
+									echo '<input type="text" class="form-control" id="nexmo-secret" name="nexmo-secret" placeholder="Secret">';
+								}
+								echo '</div>';
+							?>
 						</div>
 
 						<div role="tabpanel" class="tab-pane" id="about">

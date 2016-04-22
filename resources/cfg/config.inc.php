@@ -3,10 +3,6 @@
 	## Begin configuration
 	#######################
 	
-	# Debugging only
-	ini_set('display_errors', 1);
-	error_reporting(E_ALL);
-	
 	# Include libraries
 	include __DIR__ . '/../lib/Nexmo/NexmoMessage.php';
 	
@@ -18,7 +14,7 @@
 	
 	# General configuration
 	$Cfg_general = array(
-		'site_name' => 'Home NAS',
+		'site_name' => 'Server',
 		'nexmo_key' => '885db2be',
 		'nexmo_secret' => '773f91d9',
 		'alert_on_clear' => 0
@@ -267,6 +263,13 @@
 			$defCfg = array(
 				'auth' => array(
 					'password' => $stPass
+				),
+				'server' => array(
+					'name' => 'Server'
+				),
+				'nexmo' => array(
+					'key' => '',
+					'secret'
 				),
 				'disks' => array(
 					0 => array(
