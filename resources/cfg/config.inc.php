@@ -231,18 +231,18 @@
 						$NexmoSMS = new NexmoMessage($General['nexmo_key'], $General['nexmo_secret']);
 					
 						# Send the SMS message
-						$info = $NexmoSMS->sendText($Contact, 'Montr Alert', 'A ' . $Type . ' alert has been generated for ' . $General['site_name'] . '!');
+						$info = $NexmoSMS->sendText($Contact, 'Silo Alert', 'A ' . $Type . ' alert has been generated for ' . $General['site_name'] . '!');
 					}
 				}
 				
 				# Send an email alert
 				if(strpos($Contact_type, 'email') !== false) {
 					$Message = 'A ' . $Type . ' alert has been generated for ' . $General['site_name'] . '!';
-					$Headers = 'From: noreply@paq.nz' . "\r\n" .
-						'Reply-To: noreply@paq.nz' . "\r\n" .
+					$Headers = 'From: alerts@syncsilo.com' . "\r\n" .
+						'Reply-To: alerts@paq.nz' . "\r\n" .
 						'X-Mailer: PHP/' . phpversion();
 					
-					mail($Contact, 'Montr Alert', $Message, $Headers);
+					mail($Contact, 'Silo Alert', $Message, $Headers);
 				}
 			}
 		}
