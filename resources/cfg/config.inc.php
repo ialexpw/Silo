@@ -239,7 +239,7 @@
 				if(strpos($Contact_type, 'email') !== false) {
 					$Message = 'A ' . $Type . ' alert has been generated for ' . $General['site_name'] . '!';
 					$Headers = 'From: alerts@syncsilo.com' . "\r\n" .
-						'Reply-To: alerts@paq.nz' . "\r\n" .
+						'Reply-To: alerts@syncsilo.com' . "\r\n" .
 						'X-Mailer: PHP/' . phpversion();
 					
 					mail($Contact, 'Silo Alert', $Message, $Headers);
@@ -276,8 +276,8 @@
 					),
 				),
 				'contacts' => array(
-					'mobile_1' => '447711868356',
-					'email_1' => 'alerts@paq.nz'
+					'mobile_1' => '447711223344',
+					'email_1' => 'alerts@syncsilo.com'
 				),
 				'limits' => array(
 					'memory_usage' => '75', # (%)
