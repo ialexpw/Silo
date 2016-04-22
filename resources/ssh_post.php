@@ -22,7 +22,7 @@
 		# Update/reset/shutdown/custom command
 		if($_POST['option'] == 'update') {
 			$prntDir = dirname(dirname(__FILE__));
-			echo $ssh->exec('cd ' . $prntDir . ' && git pull');
+			echo '<span style="font-size:12px;">' . nl2br($ssh->exec('cd ' . $prntDir . ' && git pull')) . '</span>';
 		}else if($_POST['option'] == 'reboot') {
 			echo 'Rebooting';
 			$ssh->exec('reboot');
