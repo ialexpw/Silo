@@ -24,7 +24,7 @@
 			$ssh->exec('reboot');
 		}else if($_POST['option'] == 'shutdown') {
 			echo 'Shutting down';
-			$ssh->exec('reboot');
+			$ssh->exec('shutdown');
 		}else if($_POST['option'] == 'custom') {
 			echo '<span style="font-size:12px;">' . nl2br($ssh->exec($_POST['command'])) . '</span>';
 		}
