@@ -223,17 +223,17 @@
 			foreach($Contacts as $Contact_type => $Contact) {
 				# Send mobile alerts via Nexmo / SMS
 				if(strpos($Contact_type, 'mobile') !== false) {
-					if(!empty($General['nexmo_key']) && !empty($General['nexmo_secret'])) {
-						$NexmoSMS = new NexmoMessage($General['nexmo_key'], $General['nexmo_secret']);
+					if(!empty($General['nexmo']['key']) && !empty($General['nexmo']['secret'])) {
+						$NexmoSMS = new NexmoMessage($General['nexmo']['key'], $General['nexmo']['secret']);
 					
 						# Send the SMS message
-						$info = $NexmoSMS->sendText($Contact, 'Silo Alert', 'A ' . $Type . ' alert has been generated for ' . $General['site_name'] . '!');
+						$info = $NexmoSMS->sendText($Contact, 'Silo Alert', 'A ' . $Type . ' alert has been generated for ' . $General['server']['name'] . '!');
 					}
 				}
 				
 				# Send an email alert
 				if(strpos($Contact_type, 'email') !== false) {
-					$Message = 'A ' . $Type . ' alert has been generated for ' . $General['site_name'] . '!';
+					$Message = 'A ' . $Type . ' alert has been generated for ' . $General['server']['name'] . '!';
 					$Headers = 'From: alerts@syncsilo.com' . "\r\n" .
 						'Reply-To: alerts@syncsilo.com' . "\r\n" .
 						'X-Mailer: PHP/' . phpversion();

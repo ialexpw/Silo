@@ -26,7 +26,7 @@
 					fopen(__DIR__ . '/data/disk_usage_' . $Montr->makeSlug($Disk['name']), 'w');
 					
 					# Alert was not sent before, send it
-					$Montr->sendAlerts($type . ' - ' . $Montr->makeSlug($Disk['name']), $mCfg['contacts'], $Cfg_general);
+					$Montr->sendAlerts($type . ' - ' . $Montr->makeSlug($Disk['name']), $mCfg['contacts'], $mCfg);
 					
 					# Write to the daily log file
 					$Montr->WriteLog($type . ' - ' . $Montr->makeSlug($Disk['name']), $Disk['limit']);
@@ -39,7 +39,7 @@
 					# Send an alert once it's cleared?
 					if($Cfg_general['alert_on_clear']) {
 						# Alert was not sent before, send it
-						$Montr->sendAlerts($type . '_cleared - ', $mCfg['contacts'], $Cfg_general);
+						$Montr->sendAlerts($type . '_cleared - ', $mCfg['contacts'], $mCfg);
 					}
 					
 					# Write to the daily log file
@@ -59,7 +59,7 @@
 					fopen(__DIR__ . '/data/memory_usage', 'w');
 					
 					# Alert was not sent before, send it
-					$Montr->sendAlerts($type, $mCfg['contacts'], $Cfg_general);
+					$Montr->sendAlerts($type, $mCfg['contacts'], $mCfg);
 					
 					# Write to the daily log file
 					$Montr->WriteLog($type, $mCfg['limits']);
@@ -72,7 +72,7 @@
 					# Send an alert once it's cleared?
 					if($Cfg_general['alert_on_clear']) {
 						# Alert was not sent before, send it
-						$Montr->sendAlerts($type . '_cleared', $mCfg['contacts'], $Cfg_general);
+						$Montr->sendAlerts($type . '_cleared', $mCfg['contacts'], $mCfg);
 					}
 					
 					# Write to the daily log file
@@ -89,7 +89,7 @@
 					fopen(__DIR__ . '/data/load_alert', 'w');
 					
 					# Alert was not sent before, send it
-					$Montr->sendAlerts($type, $mCfg['contacts'], $Cfg_general);
+					$Montr->sendAlerts($type, $mCfg['contacts'], $mCfg);
 					
 					# Write to the daily log file
 					$Montr->WriteLog($type, $mCfg['limits']);
@@ -102,7 +102,7 @@
 					# Send an alert once it's cleared?
 					if($Cfg_general['alert_on_clear']) {
 						# Alert was not sent before, send it
-						$Montr->sendAlerts($type . '_cleared', $mCfg['contacts'], $Cfg_general);
+						$Montr->sendAlerts($type . '_cleared', $mCfg['contacts'], $mCfg);
 					}
 					
 					# Write to the daily log file
