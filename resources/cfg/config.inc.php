@@ -32,9 +32,7 @@
 			$cTime = time();
 			
 			# Check if we have an alert log
-			if(file_exists(__DIR__ . '/../data/alerts_' . date('d-m-y', $cTime) . '.json')) {
-				return;
-			}else{
+			if(!file_exists(__DIR__ . '/../data/alerts_' . date('d-m-y', $cTime) . '.json')) {
 				$mkAlertLog = fopen(__DIR__ . '/../data/alerts_' . date('d-m-y', $cTime) . '.json', 'w') or die('Please ensure the data folder is writable');
 			}
 			
