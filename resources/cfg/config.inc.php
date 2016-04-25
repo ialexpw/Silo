@@ -14,9 +14,6 @@
 	
 	# General configuration
 	$Cfg_general = array(
-		'site_name' => 'Server',
-		'nexmo_key' => '885db2be',
-		'nexmo_secret' => '773f91d9',
 		'alert_on_clear' => 0
 	);
 	
