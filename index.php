@@ -17,7 +17,7 @@
 	}
 
 	# Updating the configuration
-	if(isset($_GET['udc']) && !empty($_POST) && isset($_SESSION['Authenticated'])) {
+	if(isset($_GET['udc']) && !empty($_POST) && isset($_SESSION['Authenticated']) && $_SESSION['Authenticated'] == 1) {
 		 # Initialise the array
 		$defCfg = array();
 		
