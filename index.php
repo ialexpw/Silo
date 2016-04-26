@@ -146,7 +146,8 @@
 		
 		<br />
 		
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="resources/style/js/bootstrap.min.js"></script>
 		
 		<script>
@@ -160,8 +161,7 @@
 				$('.fill-in').load('resources/load.php').stop().fadeIn();
 			}, 5000);
 		</script>
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 		<script>
 			$(document).ready(function () {
 				$("#submit-button").click(function (e) {

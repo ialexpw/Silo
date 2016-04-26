@@ -16,10 +16,6 @@
 	$Processor = $Montr->getProcessorInfo();
 ?>
 <script>
-	jQuery( document ).ready(function( $ ) {
-		$('.tooltip').tooltip();
-	});
-	
 	$(function () {
 		$('[data-toggle="tooltip"]').tooltip()
 	})
@@ -32,7 +28,7 @@
 		<p align="center"><i class="fa fa-bar-chart fa-4x"></i></p>
 		<h4 align="center">Current Load</h4>
 		<p align="center">
-			<span class="label label-info tooltip" data-toggle="tooltip" data-placement="bottom" title="1 minute average"><?php echo $SystemLoad['one']; ?></span> 
+			<span class="label label-info" data-toggle="tooltip" data-placement="bottom" title="1 minute average"><?php echo $SystemLoad['one']; ?></span> 
 			<span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="5 minute average"><?php echo $SystemLoad['five']; ?></span> 
 			<span class="label label-warning" data-toggle="tooltip" data-placement="bottom" title="15 minute average"><?php echo $SystemLoad['fifteen']; ?></span>
 		</p>
