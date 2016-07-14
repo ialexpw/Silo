@@ -39,7 +39,6 @@
 			# Going into alarm
 			if(!empty($Limit)) {
 				# Should we add a %?
-				//if($Type == 'disk_usage') {
 				if(strpos($Type, 'disk_usage') !== false) {
 					$mkArray = array(
 						'type' => $Type,
