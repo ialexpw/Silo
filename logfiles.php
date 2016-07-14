@@ -21,13 +21,18 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Montr - Resource Monitoring</title>		
+		<title>Silo - Resource Panel</title>		
 		<link type="text/css" rel="stylesheet" href="resources/style/css/bootstrap.min.css" media="screen,projection"/>
 		<link type="text/css" rel="stylesheet" href="resources/style/css/font-awesome.min.css" media="screen"/>
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
 		<link type="text/css" rel="stylesheet" href="resources/style/css/montr.css" media="screen"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			.pdR {
+				margin-right:8px;
+			}
+		</style>
 	</head>
 	
 	<body>
@@ -40,9 +45,9 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">
+					<a class="navbar-brand" href="index.php">
 						<img alt="" class="menuimg" />
-						<p class="logo_letter">m</p>
+						<p class="logo_letter">s</p>
 					</a>
 				</div>
 				
