@@ -12,12 +12,12 @@
 	# Install montr if it has not been
 	$Montr->InstallMontr();
 	
-	# General configuration
+	# Send another alert when the alert clears?
 	$Cfg_general = array(
 		'alert_on_clear' => 0
 	);
 	
-	# The limits that must be reached to send out alerts
+	# What units to use for memory usage
 	$Cfg_limits = array(
 		'memory_units' => 'mb'
 	);
