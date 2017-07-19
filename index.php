@@ -584,7 +584,7 @@
 							<p>Silo can send both email and SMS alerts to specified contacts when
 							the alarm thresholds are hit. The SMS notifications are sent via an external service called <a target="_blank" href="https://nexmo.com">Nexmo</a>.</p>
 							
-							<p>If you have any ideas for improvement or general feedback, you can email me at <a href="mailto:montr@paq.nz">silo@paq.nz</a></p>
+							<p>If you have any ideas for improvement or general feedback, you can email me at <a href="mailto:alex@silo.one">alex@silo.one</a></p>
 						</div>
 					  </div>
 					</div>
