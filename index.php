@@ -191,7 +191,7 @@
 ?>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -215,8 +215,8 @@
 						<!-- Tab panes -->
 						<div class="tab-content">						
 							<div role="tabpanel" class="tab-pane active" id="drives">
-							<h4>Drive Information</h4>
-							<p>Enter the details of all the drives you would like to monitor here, make sure they are valid before submitting.
+				                <h4>Drive Information</h4>
+				                <p>Enter the details of all the drives you would like to monitor here, make sure they are valid before submitting.
 								If you would not like to set an alarm limit, set it to "0".</p>
 								
 							<hr>
@@ -382,9 +382,9 @@
 								echo '<label class="sr-only" for="drive1">Contact Email</label>';
 								# Check if we have an email
 								if(!empty($mCfg['contacts']['email_1'])) {
-									echo '<input type="text" class="form-control pdR" id="email1" name="email1" placeholder="Email" value="' . $mCfg['contacts']['email_1'] . '">';
+									echo '<input type="email" class="form-control pdR" id="email1" name="email1" placeholder="Email" value="' . $mCfg['contacts']['email_1'] . '">';
 								}else{
-									echo '<input type="text" class="form-control pdR" id="email1" name="email1" placeholder="Email">';
+									echo '<input type="email" class="form-control pdR" id="email1" name="email1" placeholder="Email">';
 								}
 
 								echo '<label class="sr-only" for="drive2">Contact Number</label>';
@@ -402,9 +402,9 @@
 								echo '<label class="sr-only" for="drive1">Contact Email</label>';
 								# Check if we have an email
 								if(!empty($mCfg['contacts']['email_2'])) {
-									echo '<input type="text" class="form-control pdR" id="email2" name="email2" placeholder="Email" value="' . $mCfg['contacts']['email_2'] . '">';
+									echo '<input type="email" class="form-control pdR" id="email2" name="email2" placeholder="Email" value="' . $mCfg['contacts']['email_2'] . '">';
 								}else{
-									echo '<input type="text" class="form-control pdR" id="email2" name="email2" placeholder="Email">';
+									echo '<input type="email" class="form-control pdR" id="email2" name="email2" placeholder="Email">';
 								}
 
 								echo '<label class="sr-only" for="drive2">Contact Number</label>';
@@ -422,9 +422,9 @@
 								echo '<label class="sr-only" for="drive1">Contact Email</label>';
 								# Check if we have an email
 								if(!empty($mCfg['contacts']['email_3'])) {
-									echo '<input type="text" class="form-control pdR" id="email3" name="email3" placeholder="Email" value="' . $mCfg['contacts']['email_3'] . '">';
+									echo '<input type="email" class="form-control pdR" id="email3" name="email3" placeholder="Email" value="' . $mCfg['contacts']['email_3'] . '">';
 								}else{
-									echo '<input type="text" class="form-control pdR" id="email3" name="email3" placeholder="Email">';
+									echo '<input type="email" class="form-control pdR" id="email3" name="email3" placeholder="Email">';
 								}
 
 								echo '<label class="sr-only" for="drive2">Contact Number</label>';
@@ -452,17 +452,17 @@
 								echo '<label class="sr-only" for="drive1">Memory percentage alert level</label>';
 								# Check if we have an email
 								if(isset($mCfg['limits']['memory_usage'])) {
-									echo '<input type="text" class="form-control pdR" id="mem_level" name="mem_level" placeholder="Memory usage percentage" value="' . $mCfg['limits']['memory_usage'] . '">';
+									echo '<input type="number" min="0" max="100" class="form-control pdR" id="mem_level" name="mem_level" placeholder="Memory usage percentage" value="' . $mCfg['limits']['memory_usage'] . '">';
 								}else{
-									echo '<input type="text" class="form-control pdR" id="mem_level" name="mem_level" placeholder="Memory usage percentage">';
+									echo '<input type="number" min="0" max="100" class="form-control pdR" id="mem_level" name="mem_level" placeholder="Memory usage percentage">';
 								}
 
 								echo '<label class="sr-only" for="drive2">Load alert level</label>';
 								# Check if we have a phone #
 								if(isset($mCfg['limits']['load_alert'])) {
-									echo '<input type="text" class="form-control" id="load_level" name="load_level" placeholder="Load max level" value="' . $mCfg['limits']['load_alert'] . '">';
+									echo '<input type="number" class="form-control" id="load_level" name="load_level" placeholder="Load max level" value="' . $mCfg['limits']['load_alert'] . '">';
 								}else{
-									echo '<input type="text" class="form-control" id="load_level" name="load_level" placeholder="Load max level">';
+									echo '<input type="number" class="form-control" id="load_level" name="load_level" placeholder="Load max level">';
 								}
 								echo '</div>';
 							?>
@@ -587,9 +587,8 @@
 							<p>If you have any ideas for improvement or general feedback, you can email me at <a href="mailto:montr@paq.nz">silo@paq.nz</a></p>
 						</div>
 					  </div>
-
 					</div>
-			</div>
+                </div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<button type="submit" class="btn btn-primary">Save changes</button>
