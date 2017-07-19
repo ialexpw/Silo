@@ -40,7 +40,7 @@
 		<p align="center"><i class="fa fa-clock-o fa-4x"></i></p>
 		<h4 align="center">Current Uptime</h4>
 		<p align="center">
-			<span><?php echo $SystemUptime['days'] . ' days, ' . $SystemUptime['hours'] . ' hours and ' . $SystemUptime['minutes'] . ' minutes.'; ?>
+            <span><?php echo $SystemUptime['days'] . ' days, ' . $SystemUptime['hours'] . ' hours and ' . $SystemUptime['minutes'] . ' minutes.'; ?></span>
 		</p>
 	</div>
 </div>
@@ -48,7 +48,7 @@
 <br />
 <div class="panel panel-default">
 	<div class="panel-body" style="font-size:18px;">
-		System Hostname: <?php echo gethostname(); ?><span class="pull-right"><?php echo $Processor['type'] . ' (' . $Processor['cores'] . ' cores)'; ?></span>
+		System Hostname: <?php echo gethostname(); ?><span class="pull-right"><?php echo $Processor['type'] . ' (' . $Processor['phy_cores'] . ' cores)'; ?></span>
 	</div>
 </div>
 <br />
@@ -61,8 +61,14 @@
 			foreach($mCfg['disks'] as $Disk) {
 				# Disk usage
 				$DiskUsage = $Montr->getDisk($Disk['location']);
+                
+                # Invalid disk?
+                if($DiskUsage['total'] == 0 && $DiskUsage['free'] == 0 && $DiskUsage['used'] == 0) {
+                    echo 'Drive "' . strip_tags($Disk['name']) . '" seems to be invalid.';
+                    continue;
+                }
 		?>
-			<p><?php echo $Disk['name']; ?></p>
+			<p><?php echo strip_tags($Disk['name']); ?></p>
 			<div class="barwrapp">
 				<div class="progress" style="height:12px;">
 					<div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $DiskUsage['percent']; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $DiskUsage['percent']; ?>%;">
