@@ -83,6 +83,23 @@
 			# ...and then put it back
 			file_put_contents(__DIR__ . '/../data/alerts_' . date('d-m-y', $cTime) . '.json', $jsonData);
 		}
+        
+        function WriteCronTime($time) {
+            # Write the time the cron last went
+            $cron = array(
+                'time' => $time,
+            );
+            
+            # JSON encode it
+            $jsonCron = json_encode($cron);
+            
+            # ...and then push it
+			file_put_contents(__DIR__ . '/../data/cron.json', $jsonCron);
+        }
+        
+        function WriteData($dataArr) {
+            
+        }
 		
 		function getProcessorInfo() {
 			$procData = explode("\n", file_get_contents("/proc/cpuinfo"));
@@ -97,12 +114,30 @@
 			# Processor type
 			$Proc_type = $procInfo['model_name'];
 
+            # Processor cores
 			$Proc_cores = $procInfo['cpu_cores'];
 
-			return array(
-				'type' => $Proc_type,
-				'cores' => $Proc_cores
-			);
+			//return array(
+			//	'type' => $Proc_type,
+			//	'cores' => $Proc_cores
+			//);
+            
+            ///////////////////////
+            
+            # Logical cores
+            $log_Cores = shell_exec("lscpu -p | egrep -v '^#' | wc -l");
+            
+            # Physical cores
+            $phy_Cores = shell_exec("lscpu -p | egrep -v '^#' | sort -u -t, -k 2,4 | wc -l");
+            
+            return array(
+                'type' => $Proc_type,
+				'cores' => $Proc_cores,
+                'log_cores' => $log_Cores,
+                'phy_cores' => $phy_Cores
+            );
+            
+            ///////////////////////
 		}
 		
 		function getMemory($units = '') {
