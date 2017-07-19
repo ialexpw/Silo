@@ -11,3 +11,12 @@ Simple server resource panel in PHP. Monitor load, disk and memory usage with cu
 1. Execute git clone https://github.com/ialexpw/Silo.git
 1. Ensure the resources/data directory is writable
 1. Good to go!
+
+## Demo
+You can see the frontend by going to https://silo.one - to see the configuration screens, refer to the screenshots.
+
+## Screenshots
+Coming soon!
+
+## Licence
+MIT License - Please view the LICENSE file.
