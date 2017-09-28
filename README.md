@@ -21,7 +21,12 @@ Silo has a built-in updater from the web interface. From the "Control" tab you c
 You can see the frontend by going to https://silo.one - to see the configuration screens, refer to the screenshots.
 
 ## Screenshots
-Coming soon!
+![Drives](https://silo.one/i/Drives.png "Configure Drives")
+![Contacts](https://silo.one/i/Contacts.png "Configure Contacts")
+![Limits](https://silo.one/i/Limits.png "Configure Limits")
+![Password](https://silo.one/i/Password.png "Change Password")
+![SSH Control](https://silo.one/i/Control.png "SSH Control")
+![Site Settings](https://silo.one/i/Site.png "Configure Settings")
 
 ## Licence
 MIT License - Please view the LICENSE file.
