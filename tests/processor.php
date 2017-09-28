@@ -23,11 +23,11 @@
 
 		# Logical cores
 		$log_Cores = shell_exec("lscpu -p | egrep -v '^#' | wc -l");
-		$log_Cores = str_replace(" ", "", $log_Cores);
+		$log_Cores = str_replace(" ", "", trim($log_Cores));
 
 		# Physical cores
 		$phy_Cores = shell_exec("lscpu -p | egrep -v '^#' | sort -u -t, -k 2,4 | wc -l");
-		$phy_Cores = str_replace(" ", "", $phy_Cores);
+		$phy_Cores = str_replace(" ", "", trim($phy_Cores));
 
 		return array(
 			'type' => $Proc_type,
