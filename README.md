@@ -1,6 +1,15 @@
 # Silo
 Simple server resource panel in PHP. Monitor load, disk and memory usage with custom alert limits set within Silo. Receive email and SMS alerts when you go over these set limits.
 
+## Features
+* Clean and responsive
+* Show disk, memory and load usage
+* Auto updating front-end
+* Email and SMS alerts
+* Configure all settings on the web interface
+* Create daily logfiles
+* No database needed
+
 ## Requirements
 * PHP 5.5+
 * VPS/Dedicated server recommended. Not made for shared hosting environments.
