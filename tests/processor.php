@@ -18,19 +18,17 @@
 		# Processor type
 		$Proc_type = $procInfo['model_name'];
 		
+		# Proc cores (older)
 		$Proc_cores = $procInfo['cpu_cores'];
-
-		//return array(
-		//	'type' => $Proc_type,
-		//	'cores' => $Proc_cores
-		//);
 
 		# Logical cores
 		$log_Cores = shell_exec("lscpu -p | egrep -v '^#' | wc -l");
-		
+		$log_Cores = str_replace(" ", "", $log_Cores);
+
 		# Physical cores
 		$phy_Cores = shell_exec("lscpu -p | egrep -v '^#' | sort -u -t, -k 2,4 | wc -l");
-		
+		$phy_Cores = str_replace(" ", "", $phy_Cores);
+
 		return array(
 			'type' => $Proc_type,
 			'cores' => $Proc_cores,
