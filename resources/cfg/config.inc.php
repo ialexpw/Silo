@@ -116,13 +116,6 @@
 
             # Processor cores
 			$Proc_cores = $procInfo['cpu_cores'];
-
-			//return array(
-			//	'type' => $Proc_type,
-			//	'cores' => $Proc_cores
-			//);
-            
-            ///////////////////////
             
             # Logical cores
             $log_Cores = shell_exec("lscpu -p | egrep -v '^#' | wc -l");
@@ -136,8 +129,6 @@
                 'log_cores' => $log_Cores,
                 'phy_cores' => $phy_Cores
             );
-            
-            ///////////////////////
 		}
 		
 		function getMemory($units = '') {

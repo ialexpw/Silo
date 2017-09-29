@@ -48,7 +48,7 @@
 <br />
 <div class="panel panel-default">
 	<div class="panel-body" style="font-size:18px;">
-		System Hostname: <?php echo gethostname(); ?><span class="pull-right"><?php echo $Processor['type'] . ' (' . $Processor['phy_cores'] . ' cores)'; ?></span>
+		System Hostname: <?php echo gethostname(); ?><span class="pull-right"><?php echo $Processor['type'] . ' (' . if(!empty($Processor['phy_cores'])){$Processor['phy_cores']}else{$Processor['cores']} . ' cores)'; ?></span>
 	</div>
 </div>
 <br />
