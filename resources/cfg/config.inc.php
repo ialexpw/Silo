@@ -17,7 +17,7 @@
 		'alert_on_clear' => 0
 	);
 	
-	# What units to use for memory usage
+	# What units to use for memory usage (kb, mb, gb)
 	$Cfg_limits = array(
 		'memory_units' => 'mb'
 	);
