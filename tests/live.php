@@ -3,7 +3,7 @@
   <head>
     <title>Chart.js Redraw Example</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="chart.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
     <script type="text/javascript" charset="utf-8">
       window.chartOptions = {
         segmentShowStroke: false,
