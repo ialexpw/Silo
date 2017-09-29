@@ -13,7 +13,15 @@
 	# Memory usage
 	$MemoryUsage = $Montr->getMemory($Cfg_limits['memory_units']);
 
+	# Processor
 	$Processor = $Montr->getProcessorInfo();
+
+	# Cores
+	if(!empty($Processor['phy_cores'])) {
+		$ProCores = $Processor['phy_cores'];
+	}else{
+		$ProCores = $Processor['cores'];
+	}
 ?>
 <script>
 	$(function () {
@@ -48,7 +56,7 @@
 <br />
 <div class="panel panel-default">
 	<div class="panel-body" style="font-size:18px;">
-		System Hostname: <?php echo gethostname(); ?><span class="pull-right"><?php echo $Processor['type'] . ' (' . if(!empty($Processor['phy_cores'])){$Processor['phy_cores']}else{$Processor['cores']} . ' cores)'; ?></span>
+		System Hostname: <?php echo gethostname(); ?><span class="pull-right"><?php echo $Processor['type'] . ' (' . $ProCores . ' cores)'; ?></span>
 	</div>
 </div>
 <br />
