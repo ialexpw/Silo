@@ -1,8 +1,4 @@
 <?php
-	//ini_set('display_errors', 1);
-	//ini_set('display_startup_errors', 1);
-	//error_reporting(E_ALL);
-
 	# Start the session
 	InitSession();
 
@@ -47,15 +43,6 @@
 				$defCfg['disks'][$i]['limit'] = $_POST['drive' . ($i+1) . '_limit'];
 			}
 		}
-		
-		# Build up the contact numbers
-		/*
-		for($i=0;$i<3;$i++) {
-			if(!empty($_POST['number' . ($i+1)])) {
-				$defCfg['contacts']['mobile_' . ($i+1)] = $_POST['number' . ($i+1)];
-			}
-		}
-		*/
 		
 		# Build up the contact emails
 		for($i=0;$i<3;$i++) {
@@ -389,15 +376,6 @@
 									echo '<input type="email" class="form-control pdR" id="email1" name="email1" placeholder="Email">';
 								}
 
-								/*
-								echo '<label class="sr-only" for="drive2">Contact Number</label>';
-								# Check if we have a phone #
-								if(!empty($mCfg['contacts']['mobile_1'])) {
-									echo '<input type="text" class="form-control" id="number1" name="number1" placeholder="Number" value="' . $mCfg['contacts']['mobile_1'] . '">';
-								}else{
-									echo '<input type="text" class="form-control" id="number1" name="number1" placeholder="Number">';
-								}
-								*/
 								echo '</div>';
 
 								############# CONTACT TWO
@@ -411,15 +389,6 @@
 									echo '<input type="email" class="form-control pdR" id="email2" name="email2" placeholder="Email">';
 								}
 
-								/*
-								echo '<label class="sr-only" for="drive2">Contact Number</label>';
-								# Check if we have a phone #
-								if(!empty($mCfg['contacts']['mobile_2'])) {
-									echo '<input type="text" class="form-control" id="number2" name="number2" placeholder="Number" value="' . $mCfg['contacts']['mobile_2'] . '">';
-								}else{
-									echo '<input type="text" class="form-control" id="number2" name="number2" placeholder="Number">';
-								}
-								*/
 								echo '</div>';
 
 								############# CONTACT THREE
@@ -433,15 +402,6 @@
 									echo '<input type="email" class="form-control pdR" id="email3" name="email3" placeholder="Email">';
 								}
 
-								/*
-								echo '<label class="sr-only" for="drive2">Contact Number</label>';
-								# Check if we have a phone #
-								if(!empty($mCfg['contacts']['mobile_3'])) {
-									echo '<input type="text" class="form-control" id="number3" name="number3" placeholder="Number" value="' . $mCfg['contacts']['mobile_3'] . '">';
-								}else{
-									echo '<input type="text" class="form-control" id="number3" name="number3" placeholder="Number">';
-								}
-								*/
 								echo '</div>';
 							?>
 						</div>
@@ -560,28 +520,6 @@
 									echo '<input type="text" class="form-control pdR" id="server-name" name="server-name" placeholder="Server name">';
 								}
 								echo '</div>';
-								/*
-								echo '<hr>';
-									
-								echo '<h5>Nexmo API</h5>';
-								echo '<div class="form-group">';
-								echo '<label class="sr-only" for="drive1">Nexmo Key</label>';
-								# Check if we have an email
-								if(!empty($mCfg['nexmo']['key'])) {
-									echo '<input type="text" class="form-control pdR" id="nexmo-key" name="nexmo-key" placeholder="Key" value="' . $mCfg['nexmo']['key'] . '">';
-								}else{
-									echo '<input type="text" class="form-control pdR" id="nexmo-key" name="nexmo-key" placeholder="Key">';
-								}
-
-								echo '<label class="sr-only" for="drive2">Nexmo Secret</label>';
-								# Check if we have a phone #
-								if(!empty($mCfg['nexmo']['secret'])) {
-									echo '<input type="text" class="form-control" id="nexmo-secret" name="nexmo-secret" placeholder="Secret" value="' . $mCfg['nexmo']['secret'] . '">';
-								}else{
-									echo '<input type="text" class="form-control" id="nexmo-secret" name="nexmo-secret" placeholder="Secret">';
-								}
-								echo '</div>';
-								*/
 							?>
 						</div>
 
