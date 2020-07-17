@@ -242,6 +242,7 @@
 		function sendAlerts($Type, $Contacts, $General) {
 			foreach($Contacts as $Contact_type => $Contact) {
 				# Send mobile alerts via Nexmo / SMS
+				/*
 				if(strpos($Contact_type, 'mobile') !== false) {
 					if(!empty($General['nexmo']['key']) && !empty($General['nexmo']['secret'])) {
 						$NexmoSMS = new NexmoMessage($General['nexmo']['key'], $General['nexmo']['secret']);
@@ -250,6 +251,7 @@
 						$info = $NexmoSMS->sendText($Contact, 'Silo Alert', 'A ' . $Type . ' alert has been generated for ' . $General['server']['name'] . '!');
 					}
 				}
+				*/
 				
 				# Send an email alert
 				if(strpos($Contact_type, 'email') !== false) {
@@ -299,7 +301,7 @@
 					),
 				),
 				'contacts' => array(
-					'mobile_1' => '447711223344',
+					//'mobile_1' => '447711223344',
 					'email_1' => 'alerts@silo.one'
 				),
 				'limits' => array(

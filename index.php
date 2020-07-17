@@ -49,11 +49,13 @@
 		}
 		
 		# Build up the contact numbers
+		/*
 		for($i=0;$i<3;$i++) {
 			if(!empty($_POST['number' . ($i+1)])) {
 				$defCfg['contacts']['mobile_' . ($i+1)] = $_POST['number' . ($i+1)];
 			}
 		}
+		*/
 		
 		# Build up the contact emails
 		for($i=0;$i<3;$i++) {
@@ -387,6 +389,7 @@
 									echo '<input type="email" class="form-control pdR" id="email1" name="email1" placeholder="Email">';
 								}
 
+								/*
 								echo '<label class="sr-only" for="drive2">Contact Number</label>';
 								# Check if we have a phone #
 								if(!empty($mCfg['contacts']['mobile_1'])) {
@@ -394,6 +397,7 @@
 								}else{
 									echo '<input type="text" class="form-control" id="number1" name="number1" placeholder="Number">';
 								}
+								*/
 								echo '</div>';
 
 								############# CONTACT TWO
@@ -407,6 +411,7 @@
 									echo '<input type="email" class="form-control pdR" id="email2" name="email2" placeholder="Email">';
 								}
 
+								/*
 								echo '<label class="sr-only" for="drive2">Contact Number</label>';
 								# Check if we have a phone #
 								if(!empty($mCfg['contacts']['mobile_2'])) {
@@ -414,6 +419,7 @@
 								}else{
 									echo '<input type="text" class="form-control" id="number2" name="number2" placeholder="Number">';
 								}
+								*/
 								echo '</div>';
 
 								############# CONTACT THREE
@@ -427,6 +433,7 @@
 									echo '<input type="email" class="form-control pdR" id="email3" name="email3" placeholder="Email">';
 								}
 
+								/*
 								echo '<label class="sr-only" for="drive2">Contact Number</label>';
 								# Check if we have a phone #
 								if(!empty($mCfg['contacts']['mobile_3'])) {
@@ -434,6 +441,7 @@
 								}else{
 									echo '<input type="text" class="form-control" id="number3" name="number3" placeholder="Number">';
 								}
+								*/
 								echo '</div>';
 							?>
 						</div>
@@ -537,7 +545,7 @@
 						<div role="tabpanel" class="tab-pane" id="site">
 							<h4>Site Settings</h4>
 							
-							<p>You can update Site-wide settings here, such as the server name and API credentials for the SMS gateway, Nexmo.</p>
+							<p>You can update Site-wide settings here, such as the server name.</p>
 							
 							<hr>
 							
@@ -552,7 +560,7 @@
 									echo '<input type="text" class="form-control pdR" id="server-name" name="server-name" placeholder="Server name">';
 								}
 								echo '</div>';
-								
+								/*
 								echo '<hr>';
 									
 								echo '<h5>Nexmo API</h5>';
@@ -573,6 +581,7 @@
 									echo '<input type="text" class="form-control" id="nexmo-secret" name="nexmo-secret" placeholder="Secret">';
 								}
 								echo '</div>';
+								*/
 							?>
 						</div>
 
@@ -581,10 +590,10 @@
 							
 							<p>Welcome! Silo is a simple resource panel for servers. It can monitor drive, memory and load usage as well as execute SSH commands.</p>
 							
-							<p>Silo can send both email and SMS alerts to specified contacts when
-							the alarm thresholds are hit. The SMS notifications are sent via an external service called <a target="_blank" href="https://nexmo.com">Nexmo</a>.</p>
+							<p>Silo can send email alerts to specified contacts when
+							the alarm thresholds are hit. </p>
 							
-							<p>If you have any ideas for improvement or general feedback, you can email me at <a href="mailto:alex@silo.one">alex@silo.one</a></p>
+							<p>If you have any ideas for improvement or general feedback, you can email me at <a href="mailto:silo@picotory.com">silo@picotory.com</a></p>
 						</div>
 					  </div>
 					</div>
