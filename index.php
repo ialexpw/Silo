@@ -525,7 +525,7 @@
 								echo '<h5>API Key</h5>';
 								echo '<div class="form-group">';
 								echo '<label class="sr-only" for="api-key">API Key</label>';
-								echo '<input type="text" class="form-control pdR" id="api-key" name="api-key" value="' . sha1($mCfg['server']['name'] . $mCfg['auth']['password']) . '">';
+								echo '<input type="text" class="form-control pdR" id="api-key" name="api-key" value="' . sha1($mCfg['server']['name'] . $mCfg['auth']['password']) . '" readonly>';
 								echo '</div>';
 							?>
 						</div>
