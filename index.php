@@ -107,6 +107,7 @@
 				<div class="collapse navbar-collapse" id="navcollapse">
 					<ul class="nav navbar-nav" style="margin-left:22px;">
 						<li class="active"><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
+						<li><a href="partners.php">Partners</a></li>
 						<li><a href="logfiles.php">Logs</a></li>
 					</ul>
 					<?php
@@ -122,7 +123,7 @@
 			</div>
 		</nav>
 		
-        <div class="container">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<p align="center" class="title">silo</p>
@@ -180,7 +181,7 @@
 ?>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -204,8 +205,8 @@
 						<!-- Tab panes -->
 						<div class="tab-content">						
 							<div role="tabpanel" class="tab-pane active" id="drives">
-				                <h4>Drive Information</h4>
-				                <p>Enter the details of all the drives you would like to monitor here, make sure they are valid before submitting.
+								<h4>Drive Information</h4>
+								<p>Enter the details of all the drives you would like to monitor here, make sure they are valid before submitting.
 								If you would not like to set an alarm limit, set it to "0".</p>
 								
 							<hr>
@@ -512,13 +513,19 @@
 							<?php
 								echo '<h5>Server Name</h5>';
 								echo '<div class="form-group">';
-								echo '<label class="sr-only" for="drive1">Server Name</label>';
+								echo '<label class="sr-only" for="server-name">Server Name</label>';
 								# Check if we have an email
 								if(!empty($mCfg['server']['name'])) {
 									echo '<input type="text" class="form-control pdR" id="server-name" name="server-name" placeholder="Server name" value="' . $mCfg['server']['name'] . '">';
 								}else{
 									echo '<input type="text" class="form-control pdR" id="server-name" name="server-name" placeholder="Server name">';
 								}
+								echo '</div>';
+
+								echo '<h5>API Key</h5>';
+								echo '<div class="form-group">';
+								echo '<label class="sr-only" for="api-key">API Key</label>';
+								echo '<input type="text" class="form-control pdR" id="api-key" name="api-key" value="' . sha1($mCfg['server']['name'] . $mCfg['auth']['password']) . '">';
 								echo '</div>';
 							?>
 						</div>
@@ -535,7 +542,7 @@
 						</div>
 					  </div>
 					</div>
-                </div>
+				</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<button type="submit" class="btn btn-primary">Save changes</button>
