@@ -20,6 +20,10 @@
 		}
 	}
 
+	# Resources live
+	$apiConf['resources']['load'] = $Montr->getLoad();
+	$apiConf['resources']['memory'] = $Montr->getMemory($Cfg_limits['memory_units']);
+
 	# Memory usage alert percentage
 	if(isset($mCfg['limits']['memory_usage'])) {
 		$apiConf['limits']['memory_usage'] = $mCfg['limits']['memory_usage'];
@@ -31,7 +35,7 @@
 	}
 	
 	# Encode the array into json
-	$apiConf = json_encode($apiConf);
+	//$apiConf = json_encode($apiConf);
 
 	echo '<pre>';
 	print_r($mCfg);
