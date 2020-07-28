@@ -22,12 +22,12 @@
 
 	# Memory usage alert percentage
 	if(isset($mCfg['limits']['memory_usage'])) {
-		$apiConf['limits']['memory_usage'] = $_POST['mem_level'];
+		$apiConf['limits']['memory_usage'] = $mCfg['limits']['memory_usage'];
 	}
 	
 	# Load alert level
 	if(isset($mCfg['limits']['load_alert'])) {
-		$apiConf['limits']['load_alert'] = $_POST['load_level'];
+		$apiConf['limits']['load_alert'] = $mCfg['limits']['load_alert'];
 	}
 	
 	# Encode the array into json
