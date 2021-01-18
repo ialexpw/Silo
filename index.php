@@ -151,29 +151,6 @@
 				$('.fill-in').load('resources/load.php').stop().fadeIn();
 			}, 5000);
 		</script>
-
-		<script>
-			$(document).ready(function () {
-				$("#submit-button").click(function (e) {
-					e.preventDefault();
-		
-					var username = $('#ssh-username').val();
-					var password = $('#ssh-password').val();
-					var post = $('#custom').val();
-		
-					var option = $('input[name="sshSelect"]:checked').val();
-		
-					$.ajax({ 
-						type:"POST",
-						url:"resources/ssh_post.php",
-						data: {username: username, password: password, command: post, option: option},
-						success: function(data){
-							 $(".result").html(data);
-						}
-					});
-				});
-			});
-		</script>
 	</body>
 </html>
 <?php
@@ -480,7 +457,7 @@
 						<div role="tabpanel" class="tab-pane" id="about">
 							<h4>About Silo</h4>
 							
-							<p>Welcome! Silo is a simple resource panel for servers. It can monitor drive, memory and load usage as well as execute SSH commands.</p>
+							<p>Welcome! Silo is a simple resource panel for servers. It can monitor drive, memory and load usage.</p>
 							
 							<p>Silo can send email alerts to specified contacts when
 							the alarm thresholds are hit. </p>

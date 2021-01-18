@@ -4,7 +4,6 @@ Simple server resource panel in PHP. Monitor load, disk and memory usage with cu
 ## Features
 * Clean and responsive
 * Show disk, memory and load usage
-* Auto updating front-end
 * Email alerts
 * Configure all settings on the web interface
 * Create daily logfiles
@@ -24,7 +23,7 @@ Simple server resource panel in PHP. Monitor load, disk and memory usage with cu
 1. Good to go!
 
 ## Updating Silo
-Silo has a built-in updater from the web interface. From the "Control" tab you can choose to update with your SSH credentials. If you would like to do this directly from the command line instead, you just have to execute a git pull from where you installed Silo.
+Updating can be done from the command line with a git pull.
 
 ## Demo
 You can see the frontend by going to https://perfnet.org/Silo/ - to see the configuration screens, refer to the screenshots.
