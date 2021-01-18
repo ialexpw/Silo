@@ -38,10 +38,6 @@
 	//$apiConf = json_encode($apiConf);
 
 	echo '<pre>';
-	print_r($mCfg);
-	echo '</pre>';
-
-	echo '<pre>';
 	print_r($apiConf);
 	echo '</pre>';
 ?>

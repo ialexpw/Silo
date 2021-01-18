@@ -506,7 +506,7 @@
 						<div role="tabpanel" class="tab-pane" id="site">
 							<h4>Site Settings</h4>
 							
-							<p>You can update Site-wide settings here, such as the server name and API key. The API key is based on the server name and password to access your resource panel, updating these will change your key.</p>
+							<p>You can update site-wide settings here, such as the server name and API key. The API key is based on the server name and password to access your resource panel, updating these will change your key.</p>
 							
 							<hr>
 							
