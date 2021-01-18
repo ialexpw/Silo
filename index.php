@@ -450,59 +450,6 @@
 							?>
 						</div>
 							
-						<div role="tabpanel" class="tab-pane" id="control">
-							<h4>Server Control</h4>
-							
-							<p>If you allow it, Silo can run simple commands for you on your server. Silo does not store any sensitive information about your server and only uses it to execute
-							the commands that you select.</p>
-							
-							<hr>
-							
-							<div id="ssh-post" method="post">
-								<div class="radio">
-									<label>
-										<input type="radio" name="sshSelect" id="sshSelect1" value="update" checked>
-										 Update
-									</label>
-								</div>
-								<br />
-								<div class="radio">
-									<label>
-										<input type="radio" name="sshSelect" id="sshSelect2" value="reboot">
-										 Reboot
-									</label>
-								</div>
-								<br />
-								<div class="radio">
-									<label>
-										<input type="radio" name="sshSelect" id="sshSelect3" value="shutdown">
-										 Shutdown
-									</label>
-								</div>
-								<br />
-								<div class="radio">
-									<label>
-										<input type="radio" name="sshSelect" id="sshSelect4" value="custom">
-										 Custom
-									</label>
-								</div>
-								
-								<br />
-								
-								<input type="text" class="form-control" id="custom" name="custom" placeholder="ps aux">
-								
-								<hr>
-								
-								<div class="form-group">
-									<input type="text" class="form-control pdR" id="ssh-username" name="ssh-username" placeholder="root">
-									<input type="password" class="form-control pdR" id="ssh-password" name="ssh-password" placeholder="password">
-									<button id="submit-button" class="btn btn-default">Submit</button>
-								</div>
-							</div>
-							<br />
-							<div class="well well-sm result"></div>
-						</div>
-							
 						<div role="tabpanel" class="tab-pane" id="site">
 							<h4>Site Settings</h4>
 							
