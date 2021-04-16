@@ -31,10 +31,10 @@ You can see the frontend by going to http://silo.picotory.com - to see the confi
 
 ## Screenshots
 
-Homepage
+### Homepage
 ![image](https://user-images.githubusercontent.com/7994724/115004480-c01bc980-9e9e-11eb-9b03-3b03061514b4.png)
 
-Configurator
+### Configurator
 ![image](https://user-images.githubusercontent.com/7994724/115004553-d3c73000-9e9e-11eb-9e59-daaec1f1d874.png)
 
 
