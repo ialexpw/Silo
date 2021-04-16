@@ -3,18 +3,18 @@
 	## Begin configuration
 	#######################
 	
-	# Define the class
+	// Defind the Montr class
 	$Montr = new Montr();
 
-	# Install montr if it has not been
+	// Install Silo (if not already)
 	$Montr->InstallMontr();
 	
-	# Send another alert when the alert clears?
+	// Send another alert when the alert clears?
 	$Cfg_general = array(
 		'alert_on_clear' => 0
 	);
 	
-	# What units to use for memory usage (kb, mb, gb)
+	// What units to use for memory usage (kb, mb, gb)
 	$Cfg_limits = array(
 		'memory_units' => 'mb'
 	);
@@ -214,6 +214,19 @@
 				'used' => $Disk_used,
 				'percent' => $Disk_percent
 			);
+		}
+
+		function getRaidInfo() {
+			$raidData = explode("\n", file_get_contents("/proc/mdstat"));
+
+			print_r($raidData);
+			exit();
+
+			if(in_array("(F)", $raidData)) {
+				return array('raid' => "unhealthy");
+			}else{
+				return array('raid' => "healthy");
+			}
 		}
 	
 		function getUptime() {

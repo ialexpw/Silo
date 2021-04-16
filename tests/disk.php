@@ -3,6 +3,12 @@
 	print_r(getDisk('/'));
 	echo '</pre>';
 
+	echo '<br />';
+
+	echo '<pre>';
+	print_r(getRaidInfo());
+	echo '</pre>';
+
 	function getDisk($Prt) {
 		# Total Disk
 		$Disk_total = round(disk_total_space("$Prt")/1073741824, 2);
@@ -22,5 +28,18 @@
 			'used' => $Disk_used,
 			'percent' => $Disk_percent
 		);
+	}
+
+	function getRaidInfo() {
+		$raidData = explode("\n", file_get_contents("/proc/mdstat"));
+
+		print_r($raidData);
+		exit();
+
+		if(in_array("(F)", $raidData)) {
+			return array('raid' => "unhealthy");
+		}else{
+			return array('raid' => "healthy");
+		}
 	}
 ?>
