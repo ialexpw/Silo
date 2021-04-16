@@ -43,7 +43,8 @@
 				if(str_contains($rd, 'U_') || str_contains($rd, '_U') || in_array("(F)", $raidData)) {
 					return array('raid' => "unhealthy");
 				}else{
-					return array('raid' => "healthy");
+					// Reset flag to try searching again
+					$rdFlag = 0;
 				}
 			}
 
@@ -54,9 +55,11 @@
 			}
 		}
 
-		// Could not identify raid
+		// Could not identify raid or return healthy
 		if(!$rdFlag) {
 			return array('raid' => "not_available");
+		}else{
+			return array('raid' => "healthy");
 		}
 	}
 ?>
