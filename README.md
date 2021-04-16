@@ -3,7 +3,8 @@ Simple server resource panel in PHP. Monitor load, disk and memory usage with cu
 
 ## Features
 * Clean and responsive
-* Show disk, memory and load usage
+* Show and monitor disk, memory and load usage
+* Monitor RAID status (soon)
 * Email alerts
 * Configure all settings on the web interface
 * Create daily logfiles
@@ -26,10 +27,16 @@ Simple server resource panel in PHP. Monitor load, disk and memory usage with cu
 Updating can be done from the command line with a git pull.
 
 ## Demo
-You can see the frontend by going to https://perfnet.org/Silo/ - to see the configuration screens, refer to the screenshots.
+You can see the frontend by going to http://silo.picotory.com - to see the configuration screens, refer to the screenshots.
 
 ## Screenshots
-Coming soon..
+
+Homepage
+![image](https://user-images.githubusercontent.com/7994724/115004480-c01bc980-9e9e-11eb-9b03-3b03061514b4.png)
+
+Configurator
+![image](https://user-images.githubusercontent.com/7994724/115004553-d3c73000-9e9e-11eb-9e59-daaec1f1d874.png)
+
 
 ## Licence
 MIT License - Please view the LICENSE file.
