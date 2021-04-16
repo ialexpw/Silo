@@ -222,7 +222,7 @@
 			print_r($raidData);
 			exit();
 
-			if(in_array("(F)", $raidData)) {
+			if(in_array("(F)", $raidData) || in_array("U_", $raidData) || in_array("_U", $raidData)) {
 				return array('raid' => "unhealthy");
 			}else{
 				return array('raid' => "healthy");
