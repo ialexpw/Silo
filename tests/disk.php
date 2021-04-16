@@ -33,13 +33,30 @@
 	function getRaidInfo() {
 		$raidData = explode("\n", file_get_contents("/proc/mdstat"));
 
-		print_r($raidData);
-		exit();
+		// Set a flag
+		$rdFlag = 0;
 
-		if(in_array("(F)", $raidData)) {
-			return array('raid' => "unhealthy");
-		}else{
-			return array('raid' => "healthy");
+		foreach($raidData as $rd) {
+			// Is the flag set?
+			if($rdFlag) {
+				// Check for possible errors
+				if(str_contains($rd, 'U_') || str_contains($rd, '_U') || in_array("(F)", $raidData)) {
+					return array('raid' => "unhealthy");
+				}else{
+					return array('raid' => "healthy");
+				}
+			}
+
+			// Check for the active/raid drive line
+			if(str_contains($rd, 'active') || str_contains($rd, 'md')) {
+				// Enable the flag for the next go
+				$rdFlag = 1;
+			}
+		}
+
+		// Could not identify raid
+		if(!$rdFlag) {
+			return array('raid' => "not_available");
 		}
 	}
 ?>
