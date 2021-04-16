@@ -172,7 +172,6 @@
 						<li role="presentation"><a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab">Contacts</a></li>
 						<li role="presentation"><a href="#limits" aria-controls="limits" role="tab" data-toggle="tab">Limits</a></li>
 						<li role="presentation"><a href="#password" aria-controls="settings" role="tab" data-toggle="tab">Password</a></li>
-						<li role="presentation"><a href="#control" aria-controls="control" role="tab" data-toggle="tab">Control</a></li>
 						<li role="presentation"><a href="#site" aria-controls="site" role="tab" data-toggle="tab">Site</a></li>
 						<li role="presentation"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">About</a></li>
 					</ul>
