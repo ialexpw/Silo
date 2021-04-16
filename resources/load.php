@@ -1,22 +1,25 @@
 <?php
 	include 'cfg/config.inc.php';
 	
-	# Load the config file
+	// Load the config file
 	$mCfg = $Montr->LoadConfig();
 
-	# System load
+	// System load
 	$SystemLoad = $Montr->getLoad();
 
-	# System uptime
+	// Get Raid info
+	$DiskRaid = $Montr->getRaidInfo();
+
+	// System uptime
 	$SystemUptime = $Montr->getUptime();
 
-	# Memory usage
+	// Memory usage
 	$MemoryUsage = $Montr->getMemory($Cfg_limits['memory_units']);
 
-	# Processor
+	// Processor
 	$Processor = $Montr->getProcessorInfo();
 
-	# Cores
+	// Cores
 	if(!empty($Processor['phy_cores'])) {
 		$ProCores = $Processor['phy_cores'];
 	}else{
@@ -48,7 +51,7 @@
 		<p align="center"><i class="fa fa-clock-o fa-4x"></i></p>
 		<h4 align="center">Current Uptime</h4>
 		<p align="center">
-            <span><?php echo $SystemUptime['days'] . ' days, ' . $SystemUptime['hours'] . ' hours and ' . $SystemUptime['minutes'] . ' minutes.'; ?></span>
+			<span><?php echo $SystemUptime['days'] . ' days, ' . $SystemUptime['hours'] . ' hours and ' . $SystemUptime['minutes'] . ' minutes.'; ?></span>
 		</p>
 	</div>
 </div>
@@ -64,17 +67,28 @@
 <div class="row">
 	<div class="col-md-5">
 		<p align="center"><i class="fa fa-hdd-o fa-4x"></i></p>
-		<h4 align="center">Disk Usage</h4>
 		<?php
+			// Show RAID info
+			if($DiskRaid['raid'] != 'not_available') {
+				if($DiskRaid['raid'] == 'healthy') {
+					echo '<h4 align="center">Disk Usage - RAID: OK</h4>';
+				}else if($DiskRaid['raid'] == 'unhealthy') {
+					echo '<h4 align="center">Disk Usage - RAID: ERROR</h4>';
+				}else{
+					echo '<h4 align="center">Disk Usage</h4>';
+				}
+			}
+
+			// Loop the disks
 			foreach($mCfg['disks'] as $Disk) {
 				# Disk usage
 				$DiskUsage = $Montr->getDisk($Disk['location']);
-                
-                # Invalid disk?
-                if($DiskUsage['total'] == 0 && $DiskUsage['free'] == 0 && $DiskUsage['used'] == 0) {
-                    echo 'Drive "' . strip_tags($Disk['name']) . '" seems to be invalid.';
-                    continue;
-                }
+				
+				# Invalid disk?
+				if($DiskUsage['total'] == 0 && $DiskUsage['free'] == 0 && $DiskUsage['used'] == 0) {
+					echo 'Drive "' . strip_tags($Disk['name']) . '" seems to be invalid.';
+					continue;
+				}
 		?>
 			<p><?php echo strip_tags($Disk['name']); ?></p>
 			<div class="barwrapp">
