@@ -107,7 +107,7 @@
 				<div class="collapse navbar-collapse" id="navcollapse">
 					<ul class="nav navbar-nav" style="margin-left:22px;">
 						<li class="active"><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
-						<li><a href="partners.php">Partners</a></li>
+						<!--<li><a href="partners.php">Partners</a></li>-->
 						<li><a href="logfiles.php">Logs</a></li>
 					</ul>
 					<?php
